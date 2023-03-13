@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/13 09:30:24 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/13 10:34:50 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,14 @@
 # include <unistd.h>
 # include <math.h>
 
+// map.c
+int		read_map(char *path);
+int		check_map(char *path);
+
 // error.c
-int	print_error(char *msg);
+int		print_error(char *msg);
 
 // utils.c
-int	ft_strrncmp(char *s1, char *s2, int len);
+int		ft_strrncmp(char *s1, char *s2, int len);
 
 #endif

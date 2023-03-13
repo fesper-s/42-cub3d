@@ -6,7 +6,7 @@
 #    By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 08:12:43 by fesper-s          #+#    #+#              #
-#    Updated: 2023/03/13 09:31:20 by fesper-s         ###   ########.fr        #
+#    Updated: 2023/03/13 10:31:23 by fesper-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 LIBFT	= ./lib/libft/libft.a 
 
-SRCS	= ./main.c ./src/error.c ./src/utils.c
+SRCS	= ./main.c ./src/map.c ./src/error.c ./src/utils.c
 
 OBJS	= $(SRCS:.c=.o)
 
