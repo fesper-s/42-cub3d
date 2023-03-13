@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/13 09:02:17 by fesper-s         ###   ########.fr       */
+/*   Created: 2023/03/13 08:54:44 by fesper-s          #+#    #+#             */
+/*   Updated: 2023/03/13 09:01:25 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int cub3d(char *map)
+int	ft_strrncmp(char *s1, char *s2, int len)
 {
-	if (ft_strrncmp(map, ".cub", 5))
-		return (print_error("Invalid type of file"));
-	return (0);
-}
+	int	size_s1;
+	int size_s2;
 
-int	main(int argc, char **argv)
-{
-	if (argc != 2)
-		return (print_error("Invalid number of arguments"));
-	cub3d(argv[1]);
+	if (!len)
+		return (0);
+	size_s1 = ft_strlen(s1);
+	size_s2 = ft_strlen(s2);
+	while (len)
+	{
+		if (s1[size_s1] != s2[size_s2])
+			return (s1[size_s1] - s2[size_s2]);
+		size_s1--;
+		size_s2--;
+		len--;
+	}
 	return (0);
 }

@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/13 09:02:17 by fesper-s         ###   ########.fr       */
+/*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
+/*   Updated: 2023/03/13 09:30:24 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef CUB3D_H
+# define CUB3D_H
 
-int cub3d(char *map)
-{
-	if (ft_strrncmp(map, ".cub", 5))
-		return (print_error("Invalid type of file"));
-	return (0);
-}
+# ifdef __linux__
+#  include "../lib/mlx_linux/mlx.h"
+# else
+#  include "../lib/mlx/mlx.h"
+# endif
 
-int	main(int argc, char **argv)
-{
-	if (argc != 2)
-		return (print_error("Invalid number of arguments"));
-	cub3d(argv[1]);
-	return (0);
-}
+# include "../lib/libft/libft.h"
+# include <stdio.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <math.h>
+
+// error.c
+int	print_error(char *msg);
+
+// utils.c
+int	ft_strrncmp(char *s1, char *s2, int len);
+
+#endif
