@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:47 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/13 14:01:15 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/13 14:43:47 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ int assign_map(t_map *map, char ***map_ptr, char *path, int map_len)
 			map->east = ft_strtrim(buffer + 2, " ");
 		else if (!ft_strncmp(buffer, "WE ", 3))
 			map->west = ft_strtrim(buffer + 2, " ");
+		else if (!ft_strncmp(buffer, "F ", 2))
+			map->floor = ft_strtrim(buffer + 1, " ");
+		else if (!ft_strncmp(buffer, "C ", 2))
+			map->ceiling = ft_strtrim(buffer + 1, " ");
 		else
 			map_ptr[0][++j] = ft_strdup(buffer);
 		free(buffer);
@@ -72,12 +76,22 @@ int	read_map(char *path, t_map *map)
 	int		i;
 
 	map_len = maplen(path);
-	map_ptr = malloc(sizeof(char *) * (map_len + 1 - 4));
+	map_ptr = malloc(sizeof(char *) * (map_len + 1 - 6));
 	assign_map(map, &map_ptr, path, map_len);
+	if (!check_sprites(map))
+		return (0);
 	i = -1;
-	while (++i < map_len - 4)
+	printf("--------Printing Map-------\n");
+	while (++i < map_len - 6)
 		printf("%s\n", map_ptr[i]);
-	return (0);
+	printf("--------Printing Sprites Paths-------\n");
+	printf("%s\n", map->north);
+	printf("%s\n", map->south);
+	printf("%s\n", map->east);
+	printf("%s\n", map->west);
+	printf("%s\n", map->floor);
+	printf("%s\n", map->ceiling);
+	return (1);
 }
 
 int	check_map(char *path, t_map *map)
