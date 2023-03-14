@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/14 12:14:13 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/14 12:43:11 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ int		print_error(char *msg);
 
 // utils.c
 int		ft_strrncmp(char *s1, char *s2, int len);
+void replace_char(char *str, char old, char new);
 
 #endif

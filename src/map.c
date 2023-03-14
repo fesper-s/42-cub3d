@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:47 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/14 12:16:32 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/14 12:45:06 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,15 @@ int	read_map(char *path, t_map *map)
 {
 	char	**map_ptr;
 	int		map_len;
+	int		i = -1;
 
 	map_len = maplen(path);
 	map_ptr = malloc(sizeof(char *) * (map_len + 1 - 6));
 	assign_map(map, &map_ptr, path, map_len);
 	if (!check_sprites(map))
 		return (0);
+	while (map_ptr[++i])
+		replace_char(map_ptr[i], ' ', '1');
 	map->map = map_ptr;
 	return (1);
 }
