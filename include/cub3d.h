@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/13 14:33:09 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/14 12:14:13 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 
 typedef struct s_map
 {
+	char	**map;
 	char	*north;
 	char	*south;
 	char	*east;
