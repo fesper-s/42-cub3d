@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:47 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/13 14:43:47 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/14 12:45:06 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int assign_map(t_map *map, char ***map_ptr, char *path, int map_len)
 	if (fd == -1)
 		return (print_error("File doesn't exist"));
 	i = -1;
-	j = -1;
+	j = 0;
 	while (++i < map_len)
 	{
 		buffer = ft_strtrim(get_next_line(fd), "\n");
@@ -60,11 +60,11 @@ int assign_map(t_map *map, char ***map_ptr, char *path, int map_len)
 			map->floor = ft_strtrim(buffer + 1, " ");
 		else if (!ft_strncmp(buffer, "C ", 2))
 			map->ceiling = ft_strtrim(buffer + 1, " ");
-		else
-			map_ptr[0][++j] = ft_strdup(buffer);
+		else if (ft_strlen(buffer) && buffer[0])
+			map_ptr[0][j++] = ft_strdup(buffer);
 		free(buffer);
 	}
-	map_ptr[0][j] = "\0";
+	map_ptr[0][j] = 0;
 	close(fd);
 	return (0);
 }
@@ -73,24 +73,16 @@ int	read_map(char *path, t_map *map)
 {
 	char	**map_ptr;
 	int		map_len;
-	int		i;
+	int		i = -1;
 
 	map_len = maplen(path);
 	map_ptr = malloc(sizeof(char *) * (map_len + 1 - 6));
 	assign_map(map, &map_ptr, path, map_len);
 	if (!check_sprites(map))
 		return (0);
-	i = -1;
-	printf("--------Printing Map-------\n");
-	while (++i < map_len - 6)
-		printf("%s\n", map_ptr[i]);
-	printf("--------Printing Sprites Paths-------\n");
-	printf("%s\n", map->north);
-	printf("%s\n", map->south);
-	printf("%s\n", map->east);
-	printf("%s\n", map->west);
-	printf("%s\n", map->floor);
-	printf("%s\n", map->ceiling);
+	while (map_ptr[++i])
+		replace_char(map_ptr[i], ' ', '1');
+	map->map = map_ptr;
 	return (1);
 }
 
