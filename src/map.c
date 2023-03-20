@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:47 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/20 10:04:35 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/20 10:06:35 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	maplen(char *path)
 	aux = get_next_line(fd);
 	while (aux)
 	{
+		free(aux);
 		aux = get_next_line(fd);
 		len++;
 	}
