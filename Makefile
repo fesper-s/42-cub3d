@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+         #
+#    By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 08:12:43 by fesper-s          #+#    #+#              #
-#    Updated: 2023/03/20 09:46:16 by fesper-s         ###   ########.fr        #
+#    Updated: 2023/03/20 12:41:30 by gussoare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ CFLAGS	= -g -Wall -Wextra -Werror
 
 LIBFT	= ./lib/libft/libft.a 
 
-SRCS	= ./main.c ./src/map.c ./src/error.c ./src/utils.c ./src/check.c
+SRCS	= ./main.c ./src/map.c ./src/error.c ./src/utils.c ./src/check.c\
+		  ./src/init.c
 
 OBJS	= $(SRCS:.c=.o)
 

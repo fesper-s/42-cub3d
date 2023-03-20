@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 08:54:44 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/20 09:56:00 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/20 14:18:11 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,17 @@ void	free_map(t_map *map)
 	free(map->west);
 	free(map->floor);
 	free(map->ceiling);
+}
+
+int char_in_str(char *str, char c)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == c)
+			return (1);
+	}
+	return (0);
 }

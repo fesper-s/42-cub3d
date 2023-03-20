@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:47 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/20 10:12:15 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/20 14:25:33 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,6 @@ int	maplen(char *path)
 	return (len);
 }
 
-void	init_map(t_map *map)
-{
-	map->north = NULL;
-}
-
 int assign_map(t_map *map, char *path, int map_len)
 {
 	int		i;
@@ -47,7 +42,6 @@ int assign_map(t_map *map, char *path, int map_len)
 	char	*buffer;
 	char	*aux;
 
-	init_map(map);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (print_error("File doesn't exist"));
