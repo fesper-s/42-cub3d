@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:47 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/14 12:45:06 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/20 10:04:35 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,21 @@
 
 int	maplen(char *path)
 {
-	int	len;
-	int	fd;
+	int		len;
+	int		fd;
+	char	*aux;
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (print_error("File doesn't exist"));
 	len = 0;
-	while (get_next_line(fd))
+	aux = get_next_line(fd);
+	while (aux)
+	{
+		aux = get_next_line(fd);
 		len++;
+	}
+	free(aux);
 	close(fd);
 	return (len);
 }
