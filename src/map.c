@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:47 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/14 12:45:06 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/20 10:12:15 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,22 @@
 
 int	maplen(char *path)
 {
-	int	len;
-	int	fd;
+	int		len;
+	int		fd;
+	char	*aux;
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (print_error("File doesn't exist"));
 	len = 0;
-	while (get_next_line(fd))
+	aux = get_next_line(fd);
+	while (aux)
+	{
+		free(aux);
+		aux = get_next_line(fd);
 		len++;
+	}
+	free(aux);
 	close(fd);
 	return (len);
 }
@@ -32,12 +39,13 @@ void	init_map(t_map *map)
 	map->north = NULL;
 }
 
-int assign_map(t_map *map, char ***map_ptr, char *path, int map_len)
+int assign_map(t_map *map, char *path, int map_len)
 {
 	int		i;
 	int		j;
 	int		fd;
 	char	*buffer;
+	char	*aux;
 
 	init_map(map);
 	fd = open(path, O_RDONLY);
@@ -47,7 +55,8 @@ int assign_map(t_map *map, char ***map_ptr, char *path, int map_len)
 	j = 0;
 	while (++i < map_len)
 	{
-		buffer = ft_strtrim(get_next_line(fd), "\n");
+		aux = get_next_line(fd);
+		buffer = ft_strtrim(aux, "\n");
 		if (!ft_strncmp(buffer, "NO ", 3))
 			map->north = ft_strtrim(buffer + 2, " ");
 		else if (!ft_strncmp(buffer, "SO ", 3))
@@ -61,28 +70,27 @@ int assign_map(t_map *map, char ***map_ptr, char *path, int map_len)
 		else if (!ft_strncmp(buffer, "C ", 2))
 			map->ceiling = ft_strtrim(buffer + 1, " ");
 		else if (ft_strlen(buffer) && buffer[0])
-			map_ptr[0][j++] = ft_strdup(buffer);
+			map->map[j++] = ft_strdup(buffer);
 		free(buffer);
+		free(aux);
 	}
-	map_ptr[0][j] = 0;
+	map->map[j] = 0;
 	close(fd);
 	return (0);
 }
 
 int	read_map(char *path, t_map *map)
 {
-	char	**map_ptr;
 	int		map_len;
 	int		i = -1;
 
 	map_len = maplen(path);
-	map_ptr = malloc(sizeof(char *) * (map_len + 1 - 6));
-	assign_map(map, &map_ptr, path, map_len);
+	map->map = malloc(sizeof(char *) * (map_len + 1 - 6));
+	assign_map(map, path, map_len);
 	if (!check_sprites(map))
 		return (0);
-	while (map_ptr[++i])
-		replace_char(map_ptr[i], ' ', '1');
-	map->map = map_ptr;
+	while (map->map[++i])
+		replace_char(map->map[i], ' ', '1');
 	return (1);
 }
 

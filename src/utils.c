@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 08:54:44 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/14 12:42:50 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/20 09:56:00 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,20 @@ void replace_char(char *str, char old, char new)
 		if (str[i] == old)
 			str[i] = new;
 	}
+}
+
+void	free_map(t_map *map)
+{
+	int	i;
+
+	i = -1;
+	while (map->map[++i])
+		free(map->map[i]);
+	free(map->map);
+	free(map->north);
+	free(map->south);
+	free(map->east);
+	free(map->west);
+	free(map->floor);
+	free(map->ceiling);
 }
