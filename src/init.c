@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:32:20 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/20 14:26:57 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/21 09:10:48 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,34 @@ void pl_pos(t_game *game, t_map *map)
         {
             if (char_in_str("NSEW", map->map[i][j]))
             {
-                game->pl_x = j;
-                game->pl_y = i;
+                game->pl->pl_x = j;
+                game->pl->pl_y = i;
             }
             if (map->map[i][j] == 'N')
-                game->pldir_y = 1;
+                game->pl->pldir_y = 1;
             else if (map->map[i][j] == 'S')
-                game->pldir_y = -1;
+                game->pl->pldir_y = -1;
             else if (map->map[i][j] == 'E')
-                game->pldir_x = 1;
+                game->pl->pldir_x = 1;
             else if (map->map[i][j] == 'W')
-                game->pldir_x = -1; 
+                game->pl->pldir_x = -1; 
         }
     }
 }
 
 void init_var(t_map *map, t_game *game)
 {
-    game->pl_x = 0;
-    game->pl_y = 0;
-    game->pldir_x = 0;
-    game->pldir_y = 0;
-	game->plane_x = 0;
-	game->plane_y = 0.66;
+    game->pl->pl_x = 0;
+    game->pl->pl_y = 0;
+    game->pl->pldir_x = 0;
+    game->pl->pldir_y = 0;
+	game->ray->plane_x = 0;
+	game->ray->plane_y = 0.66;
+    game->ray->raydir_x = 0;
+	game->ray->raydir_y = 0;
+	game->ray->camera_x = 0;
 	game->frame = 0;
 	game->old_frame = 0;
+    game->map = map;
     pl_pos(game, map);
 }
