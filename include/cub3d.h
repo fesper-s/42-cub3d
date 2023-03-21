@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/21 09:04:13 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/21 13:28:05 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,22 @@ typedef struct s_raycast
 	double	raydir_x;
 	double	raydir_y;
 	double	camera_x;
+	double	delta_x;
+	double	delta_y;
+	double	side_x;
+	double	side_y;
+	double	step_x;
+	double	step_y;
+	int		map_x;
+	int		map_y;
+	double	camera_wall;
+	int 	hit;
+	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+
+
 } t_raycast;
 
 typedef struct s_map
@@ -55,6 +71,8 @@ typedef struct s_map
 
 typedef struct s_game
 {
+	int		width;
+	int		height;
 	double	frame;
 	double	old_frame;
 
@@ -77,6 +95,9 @@ int		check_sprites(t_map *map);
 
 void	pl_pos(t_game *game, t_map *map);
 void	init_var(t_map *map, t_game *game);
+
+//raycast.c
+void	raycasting(t_game *game);
 
 // error.c
 int		print_error(char *msg);

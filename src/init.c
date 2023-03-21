@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:32:20 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/21 09:10:48 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/21 13:48:18 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void pl_pos(t_game *game, t_map *map)
         {
             if (char_in_str("NSEW", map->map[i][j]))
             {
-                game->pl->pl_x = j;
-                game->pl->pl_y = i;
+                game->pl->pl_x = i;
+                game->pl->pl_y = j;
             }
             if (map->map[i][j] == 'N')
                 game->pl->pldir_y = 1;
@@ -42,6 +42,8 @@ void pl_pos(t_game *game, t_map *map)
 
 void init_var(t_map *map, t_game *game)
 {
+    game->height = 480;
+    game->width = 640;
     game->pl->pl_x = 0;
     game->pl->pl_y = 0;
     game->pl->pldir_x = 0;
@@ -55,4 +57,9 @@ void init_var(t_map *map, t_game *game)
 	game->old_frame = 0;
     game->map = map;
     pl_pos(game, map);
+    game->ray->map_x = game->pl->pl_x;
+    game->ray->map_y = game->pl->pl_y;
+    game->ray->hit = 0;
+    game->ray->side = 0;
+    game->ray->camera_wall = 0;
 }
