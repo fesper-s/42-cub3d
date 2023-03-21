@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/20 14:59:02 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/21 09:11:11 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,23 @@ int cub3d(char *path, t_map *map, t_game *game)
 
 int	main(int argc, char **argv)
 {
-	t_map	map;
-	t_game	game;
+	t_map		map;
+	t_game		game;
+	t_raycast   ray;
+    t_player    pl;
 
 	if (argc != 2)
 		return (print_error("Invalid number of arguments"));
+	game.ray = &ray;
+	game.pl = &pl;
 	cub3d(argv[1], &map, &game);
 	int i = -1;
-	while (map.map[++i])
-		printf("%s\n", map.map[i]);
-	printf("player pos_x--> %f\n", game.pl_x);
-	printf("player pos_y--> %f\n", game.pl_y);
-	printf("player dir_x--> %f\n", game.pldir_x);
-	printf("player dir_y--> %f\n", game.pldir_y);
+	while (game.map->map[++i])
+		printf("%s\n", game.map->map[i]);
+	printf("player pos_x--> %f\n", game.pl->pl_x);
+	printf("player pos_y--> %f\n", game.pl->pl_y);
+	printf("player dir_x--> %f\n", game.pl->pldir_x);
+	printf("player dir_y--> %f\n", game.pl->pldir_y);
 	free_map(&map);
 	return (0);
 }

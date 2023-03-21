@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/20 14:22:00 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/21 09:04:13 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,23 @@
 # include <unistd.h>
 # include <math.h>
 
+typedef struct s_player
+{
+	double	pl_x;
+	double	pl_y;
+	double	pldir_x;
+	double	pldir_y;
+} t_player;
+
+typedef struct s_raycast
+{
+	double	plane_x;
+	double	plane_y;
+	double	raydir_x;
+	double	raydir_y;
+	double	camera_x;
+} t_raycast;
+
 typedef struct s_map
 {
 	char	**map;
@@ -38,18 +55,15 @@ typedef struct s_map
 
 typedef struct s_game
 {
-	double	pl_x;
-	double	pl_y;
-	double	pldir_x;
-	double	pldir_y;
-	double	plane_x;
-	double	plane_y;
 	double	frame;
 	double	old_frame;
 
 	void	*mlx;
 	void	*mlx_win;
 	
+	struct	s_map		*map;
+	struct	s_player	*pl;
+	struct	s_raycast	*ray;
 } t_game;
 
 // map.c
