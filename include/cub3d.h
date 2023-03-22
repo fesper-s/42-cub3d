@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/21 13:28:05 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/22 12:55:42 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,9 @@ int		check_sprites(t_map *map);
 
 void	pl_pos(t_game *game, t_map *map);
 void	init_var(t_map *map, t_game *game);
+
+// textures.c
+void	get_texture(void);
 
 //raycast.c
 void	raycasting(t_game *game);
