@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/21 13:28:05 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/22 13:38:59 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,35 @@
 # include <unistd.h>
 # include <math.h>
 
+# ifdef __linux__
+
+enum e_keycode
+{
+    UP_KEY = 119,
+    DOWN_KEY = 115,
+    LEFT_KEY = 97,
+    RIGHT_KEY = 100,
+    ESC = 65307
+};
+# else
+
+enum e_keycode
+{
+    UP_KEY = 13,
+    DOWN_KEY = 1,
+    LEFT_KEY = 0,
+    RIGHT_KEY = 2,
+    ESC = 53
+};
+# endif
+
 typedef struct s_player
 {
 	double	pl_x;
 	double	pl_y;
 	double	pldir_x;
 	double	pldir_y;
-} t_player;
+}	t_player;
 
 typedef struct s_raycast
 {
@@ -49,14 +71,15 @@ typedef struct s_raycast
 	int		map_x;
 	int		map_y;
 	double	camera_wall;
-	int 	hit;
+	int		hit;
 	int		side;
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-
-
-} t_raycast;
+	double	wall_x;
+	int		texNum;
+	int		tex_x;
+}	t_raycast;
 
 typedef struct s_map
 {
@@ -67,22 +90,20 @@ typedef struct s_map
 	char	*west;
 	char	*floor;
 	char	*ceiling;
-} t_map;
+}	t_map;
 
 typedef struct s_game
 {
-	int		width;
-	int		height;
-	double	frame;
-	double	old_frame;
-
-	void	*mlx;
-	void	*mlx_win;
-	
-	struct	s_map		*map;
-	struct	s_player	*pl;
-	struct	s_raycast	*ray;
-} t_game;
+	int					width;
+	int					height;
+	double				frame;
+	double				old_frame;
+	void				*mlx;
+	void				*mlx_win;
+	struct s_map		*map;
+	struct s_player		*pl;
+	struct s_raycast	*ray;
+}	t_game;
 
 // map.c
 int		read_map(char *path, t_map *map);
@@ -94,7 +115,7 @@ int		check_sprites(t_map *map);
 //init.c
 
 void	pl_pos(t_game *game, t_map *map);
-void	init_var(t_map *map, t_game *game);
+void	init_var(t_game *game);
 
 //raycast.c
 void	raycasting(t_game *game);
@@ -104,7 +125,7 @@ int		print_error(char *msg);
 
 // utils.c
 int		ft_strrncmp(char *s1, char *s2, int len);
-void 	replace_char(char *str, char old, char new);
+void	replace_char(char *str, char old, char new);
 void	free_map(t_map *map);
 int		char_in_str(char *str, char c);
 
