@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/21 09:11:11 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:01:17 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int cub3d(char *path, t_map *map, t_game *game)
 	init_var(map, game);
 	game->mlx = mlx_init();
 	game->mlx_win = mlx_new_window(game->mlx, 640, 480, "Wolfenstein 3D");
+	raycasting(game);
 	mlx_loop(game->mlx);
 	return (1);
 }
