@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/22 14:07:22 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/22 14:22:43 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,72 @@ int	key_event(int key, t_game *game)
 	printf("direction_y--> %f\n", game->pl->pldir_y);
 	if (key == UP_KEY)
 	{
+		mlx_clear_window(game->mlx, game->mlx_win);
 		printf("HELLO\n");
-		if (game->map->map[(int)(pl->pl_x + pl->pldir_x * 0.5)][(int)pl->pl_y] == 0) 
-	  		pl->pl_x += pl->pldir_x * 0.5;
-      	if (game->map->map[(int)(pl->pl_x)][(int)(pl->pl_y + pl->pldir_y * 0.5)] == 0)
-	  		pl->pl_y += pl->pldir_y * 0.5;
+		pl->pl_x += 0.5;
+		// if (game->map->map[(int)(pl->pl_x + pl->pldir_x * 0.5)][(int)pl->pl_y] == '0')
+		// {
+		// 	printf("if 1\n");
+		// 	pl->pl_x += pl->pldir_x * 0.5;
+		// }
+      	// if (game->map->map[(int)(pl->pl_x)][(int)(pl->pl_y + pl->pldir_y * 0.5)] == '0')
+		// {
+		// 	printf("if 2\n");
+	  	// 	pl->pl_y += pl->pldir_y * 0.5;
+		// }
+		raycasting(game);
     }
-	//if (key == DOWN_KEY)
-	//if (key == RIGHT_KEY)
-	//if (key == LEFT_KEY)
+	if (key == DOWN_KEY)
+	{
+		mlx_clear_window(game->mlx, game->mlx_win);
+		printf("HELLO\n");
+		pl->pl_x -= 0.5;
+		// if (game->map->map[(int)(pl->pl_x + pl->pldir_x * 0.5)][(int)pl->pl_y] == '0')
+		// {
+		// 	printf("if 1\n");
+		// 	pl->pl_x += pl->pldir_x * 0.5;
+		// }
+      	// if (game->map->map[(int)(pl->pl_x)][(int)(pl->pl_y + pl->pldir_y * 0.5)] == '0')
+		// {
+		// 	printf("if 2\n");
+	  	// 	pl->pl_y += pl->pldir_y * 0.5;
+		// }
+		raycasting(game);
+    }
+	if (key == RIGHT_KEY)
+	{
+		mlx_clear_window(game->mlx, game->mlx_win);
+		printf("HELLO\n");
+		pl->pl_y += 0.5;
+		// if (game->map->map[(int)(pl->pl_x + pl->pldir_x * 0.5)][(int)pl->pl_y] == '0')
+		// {
+		// 	printf("if 1\n");
+		// 	pl->pl_x += pl->pldir_x * 0.5;
+		// }
+      	// if (game->map->map[(int)(pl->pl_x)][(int)(pl->pl_y + pl->pldir_y * 0.5)] == '0')
+		// {
+		// 	printf("if 2\n");
+	  	// 	pl->pl_y += pl->pldir_y * 0.5;
+		// }
+		raycasting(game);
+    }
+	if (key == LEFT_KEY)
+	{
+		mlx_clear_window(game->mlx, game->mlx_win);
+		printf("HELLO\n");
+		pl->pl_y -= 0.5;
+		// if (game->map->map[(int)(pl->pl_x + pl->pldir_x * 0.5)][(int)pl->pl_y] == '0')
+		// {
+		// 	printf("if 1\n");
+		// 	pl->pl_x += pl->pldir_x * 0.5;
+		// }
+      	// if (game->map->map[(int)(pl->pl_x)][(int)(pl->pl_y + pl->pldir_y * 0.5)] == '0')
+		// {
+		// 	printf("if 2\n");
+	  	// 	pl->pl_y += pl->pldir_y * 0.5;
+		// }
+		raycasting(game);
+    }
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 09:15:23 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/22 14:03:14 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/22 14:24:15 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 void	ver_line(int x, t_game *game)
 {
 	t_raycast	*ray;
-	int color;
+	int			color;
 
 	ray = game->ray;
 	if (game->map->map[ray->map_x][ray->map_y] == '1')
 		color = 0x40E0D0;
 	if (game->map->map[ray->map_x][ray->map_y] == '2')
 		color = 0xFF5555;
-	while (++ray->draw_start < ray->draw_end)
+	while (++ray->draw_start <= ray->draw_end)
 	{
 		if (ray->side == 1)
 			mlx_pixel_put(game->mlx, game->mlx_win, \
