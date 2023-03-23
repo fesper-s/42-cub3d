@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/23 08:36:48 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/23 12:43:15 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,17 @@ enum e_keycode
     ESC = 53
 };
 # endif
+
+typedef struct s_keys
+{
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+	int	left;
+	int	right;
+}	t_keys;
+
 
 typedef struct s_player
 {
@@ -109,6 +120,7 @@ typedef struct s_game
 	struct s_map		*map;
 	struct s_player		*pl;
 	struct s_raycast	*ray;
+	struct s_keys		*keys;
 }	t_game;
 
 // map.c
@@ -125,6 +137,13 @@ void	init_var(t_game *game);
 
 //raycast.c
 void	raycasting(t_game *game);
+
+//movement.c
+int		key_event(int key, t_game *game);
+int		key_press(int key, t_game *game);
+int		key_release(int key, t_game *game);
+
+
 
 // error.c
 int		print_error(char *msg);
