@@ -6,85 +6,112 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:02:24 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/23 12:49:58 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:35:41 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	key_event(int key, t_game *game)
+void vertical_movement(int key, t_game *game, double speed)
+{
+	t_player	*pl;
+
+	pl = game->pl;
+	if (key == W_KEY)
+	{
+		if (game->map->map[(int)(pl->pl_x + pl->pldir_x *speed)][(int)pl->pl_y] == '0')
+			pl->pl_x += pl->pldir_x *speed;
+      	if (game->map->map[(int)(pl->pl_x)][(int)(pl->pl_y + pl->pldir_y *speed)] == '0')
+	  		pl->pl_y += pl->pldir_y *speed;
+    }
+	else if (key == S_KEY)
+	{
+		if (game->map->map[(int)(pl->pl_x - pl->pldir_x *speed)][(int)pl->pl_y] == '0')
+			pl->pl_x -= pl->pldir_x *speed;
+      	if (game->map->map[(int)(pl->pl_x)][(int)(pl->pl_y - pl->pldir_y *speed)] == '0')
+	  		pl->pl_y -= pl->pldir_y *speed;
+    }
+}
+
+void horizontal_movement(int key, t_game *game, double speed)
 {
 	t_player	*pl;
 	t_raycast	*ray;
 
 	pl = game->pl;
 	ray = game->ray;
-	
-	while (key == W_KEY)
-	{
-		if (game->map->map[(int)(pl->pl_x + pl->pldir_x * 0.05)][(int)pl->pl_y] == '0')
-			pl->pl_x += pl->pldir_x * 0.05;
-      	if (game->map->map[(int)(pl->pl_x)][(int)(pl->pl_y + pl->pldir_y * 0.05)] == '0')
-	  		pl->pl_y += pl->pldir_y * 0.05;
-		mlx_clear_window(game->mlx, game->mlx_win);
-		raycasting(game);
-    }
-	
-	if (key == S_KEY)
-	{
-		if (game->map->map[(int)(pl->pl_x - pl->pldir_x * 0.05)][(int)pl->pl_y] == '0')
-			pl->pl_x -= pl->pldir_x * 0.05;
-      	if (game->map->map[(int)(pl->pl_x)][(int)(pl->pl_y - pl->pldir_y * 0.05)] == '0')
-	  		pl->pl_y -= pl->pldir_y * 0.05;
-		mlx_clear_window(game->mlx, game->mlx_win);
-		raycasting(game);
-    }
-
 	if (key == D_KEY)
 	{
-		if (game->map->map[(int)(pl->pl_x + ray->plane_x * 0.05)][(int)pl->pl_y] == '0')
-			pl->pl_x += ray->plane_x * 0.05;
-		if (game->map->map[(int)pl->pl_x][(int)(pl->pl_y + ray->plane_y * 0.05)] == '0')
-			pl->pl_y += ray->plane_y * 0.05;
-		mlx_clear_window(game->mlx, game->mlx_win);
-		raycasting(game);
+		if (game->map->map[(int)(pl->pl_x + ray->plane_x *speed)][(int)pl->pl_y] == '0')
+			pl->pl_x += ray->plane_x *speed;
+		if (game->map->map[(int)pl->pl_x][(int)(pl->pl_y + ray->plane_y *speed)] == '0')
+			pl->pl_y += ray->plane_y *speed;
     }
-
-
-	if (key == A_KEY)
+	else if (key == A_KEY)
 	{
-		if (game->map->map[(int)(pl->pl_x - ray->plane_x * 0.05)][(int)pl->pl_y] == '0')
-			pl->pl_x -= ray->plane_x * 0.05;
-		if (game->map->map[(int)pl->pl_x][(int)(pl->pl_y - ray->plane_y * 0.05)] == '0')
-			pl->pl_y -= ray->plane_y * 0.05;
-		mlx_clear_window(game->mlx, game->mlx_win);
-		raycasting(game);
+		if (game->map->map[(int)(pl->pl_x - ray->plane_x *speed)][(int)pl->pl_y] == '0')
+			pl->pl_x -= ray->plane_x *speed;
+		if (game->map->map[(int)pl->pl_x][(int)(pl->pl_y - ray->plane_y *speed)] == '0')
+			pl->pl_y -= ray->plane_y *speed;
 	}
+}
 
+void	camera_movement(int key, t_game *game, double speed)
+{
+	t_player	*pl;
+	t_raycast	*ray;
+
+	pl = game->pl;
+	ray = game->ray;
 	if (key == RIGHT_KEY)
 	{
 		pl->old_pldir_x = pl->pldir_x;
-      	pl->pldir_x = pl->pldir_x * cos(0.05) - pl->pldir_y * sin(0.05);
-      	pl->pldir_y = pl->old_pldir_x * sin(0.05) + pl->pldir_y * cos(0.05);
+      	pl->pldir_x = pl->pldir_x * cos(speed) - pl->pldir_y * sin(speed);
+      	pl->pldir_y = pl->old_pldir_x * sin(speed) + pl->pldir_y * cos(speed);
       	ray->old_plane_x = ray->plane_x;
-      	ray->plane_x = ray->plane_x * cos(0.05) - ray->plane_y * sin(0.05);
-     	ray->plane_y = ray->old_plane_x * sin(0.05) + ray->plane_y * cos(0.05);
-		mlx_clear_window(game->mlx, game->mlx_win);
-		raycasting(game);
+      	ray->plane_x = ray->plane_x * cos(speed) - ray->plane_y * sin(speed);
+     	ray->plane_y = ray->old_plane_x * sin(speed) + ray->plane_y * cos(speed);
 	}
-
-	if (key == LEFT_KEY)
+	else if (key == LEFT_KEY)
 	{
 		pl->old_pldir_x = pl->pldir_x;
-      	pl->pldir_x = pl->pldir_x * cos(-0.05) - pl->pldir_y * sin(-0.05);
-      	pl->pldir_y = pl->old_pldir_x * sin(-0.05) + pl->pldir_y * cos(-0.05);
+      	pl->pldir_x = pl->pldir_x * cos(-speed) - pl->pldir_y * sin(-speed);
+      	pl->pldir_y = pl->old_pldir_x * sin(-speed) + pl->pldir_y * cos(-speed);
       	ray->old_plane_x = ray->plane_x;
-      	ray->plane_x = ray->plane_x * cos(-0.05) - ray->plane_y * sin(-0.05);
-     	ray->plane_y = ray->old_plane_x * sin(-0.05) + ray->plane_y * cos(-0.05);
-		mlx_clear_window(game->mlx, game->mlx_win);
-		raycasting(game);
+      	ray->plane_x = ray->plane_x * cos(-speed) - ray->plane_y * sin(-speed);
+     	ray->plane_y = ray->old_plane_x * sin(-speed) + ray->plane_y * cos(-speed);
 	}
-	return (0);
+}
+
+
+void	handle_keys(t_game *game)
+{
+	t_keys	*keys;
+	float		speed;
+
+	keys = game->keys;
+	speed = 0.05;
+	if (keys->w != keys->s)
+	{
+		if (keys->w == 1)
+			vertical_movement(W_KEY, game, speed);
+		else if (keys->s == 1)
+			vertical_movement(S_KEY, game, speed);
+	}
+	if (keys->a != keys->d)
+	{
+		if (keys->a == 1)
+			horizontal_movement(A_KEY, game, speed);
+		else if (keys->d == 1)
+			horizontal_movement(D_KEY, game, speed);
+	}
+	if (keys->right != keys->left)
+	{
+		if (keys->right == 1)
+			camera_movement(RIGHT_KEY, game, speed);
+		else if (keys->left == 1)
+			camera_movement(LEFT_KEY, game, speed);
+	}
 }
 
 int	key_press(int key, t_game *game)

@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/23 12:52:51 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:34:05 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ int	close_game(t_game *game)
 	return (0);
 }
 
-void	game_loop(t_game *game)
+int	game_loop(t_game *game)
 {
-	handle_keys(game)
-	
+	handle_keys(game);
+	mlx_clear_window(game->mlx, game->mlx_win);
+	raycasting(game);
+	return (0);
 }
 
 int	cub3d(char *path, t_map *map, t_game *game)
@@ -52,13 +54,10 @@ int	cub3d(char *path, t_map *map, t_game *game)
 	game->mlx = mlx_init();
 	game->mlx_win = mlx_new_window(game->mlx, 640, 480, "Wolfenstein 3D");
 
-	//inicia funçãa que realiza o algorítmo raycast
-	raycasting(game);
-
 	//permite utilizar o teclado para se movimentar no jogo
-	mlx_hook(game->mlx_win, 2, 0, key_press, game);
+	mlx_hook(game->mlx_win, 2, (1L << 0), key_press, game);
 
-	mlx_hook(game->mlx_win, 3, 0, key_release, game);
+	mlx_hook(game->mlx_win, 3, (1L << 1), key_release, game);
 
 	//permite fechar a janela ao apertar no X, enviando para uma função de exiting game
 	mlx_hook(game->mlx_win, 17, 0, close_game, game);
