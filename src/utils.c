@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 08:54:44 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/20 14:18:11 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/23 08:24:13 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_strrncmp(char *s1, char *s2, int len)
 	return (0);
 }
 
-void replace_char(char *str, char old, char new)
+void	replace_char(char *str, char old, char new)
 {
 	int	i;
 
@@ -60,7 +60,7 @@ void	free_map(t_map *map)
 	free(map->ceiling);
 }
 
-int char_in_str(char *str, char c)
+int	char_in_str(char *str, char c)
 {
 	int	i;
 

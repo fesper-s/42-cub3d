@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/22 12:55:42 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/23 12:05:42 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,18 +97,23 @@ void	pl_pos(t_game *game, t_map *map);
 void	init_var(t_map *map, t_game *game);
 
 // textures.c
-void	get_texture(void);
+int		**get_texture(void);
 
 //raycast.c
 void	raycasting(t_game *game);
 
+// utils.c
+int		ft_strrncmp(char *s1, char *s2, int len);
+void	replace_char(char *str, char old, char new);
+void	free_map(t_map *map);
+int		char_in_str(char *str, char c);
+
+int		atoi_hex(const char *str, int i, int len, long nbr);
+
 // error.c
 int		print_error(char *msg);
 
-// utils.c
-int		ft_strrncmp(char *s1, char *s2, int len);
-void 	replace_char(char *str, char old, char new);
-void	free_map(t_map *map);
-int		char_in_str(char *str, char c);
+// memory.c
+void	free_charpp(char **ptr);
 
 #endif
