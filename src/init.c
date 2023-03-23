@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:32:20 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/22 13:35:04 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/23 09:25:16 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,17 @@ void	pl_pos(t_game *game, t_map *map)
 			{
 				game->pl->pl_x = i;
 				game->pl->pl_y = j;
+				if (map->map[i][j] == 'N')
+					game->pl->pldir_x = 1;
+				else if (map->map[i][j] == 'S')
+					game->pl->pldir_x = -1;
+				else if (map->map[i][j] == 'E')
+					game->pl->pldir_y = 1;
+				else if (map->map[i][j] == 'W')
+					game->pl->pldir_y = -1;
+				map->map[i][j] = '0';
 			}
-			if (map->map[i][j] == 'N')
-				game->pl->pldir_x = 1;
-			else if (map->map[i][j] == 'S')
-				game->pl->pldir_x = -1;
-			else if (map->map[i][j] == 'E')
-				game->pl->pldir_y = 1;
-			else if (map->map[i][j] == 'W')
-				game->pl->pldir_y = -1;
+			
 		}
 	}
 }

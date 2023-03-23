@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/22 13:38:59 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/23 08:36:48 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,24 @@
 
 enum e_keycode
 {
-    UP_KEY = 119,
-    DOWN_KEY = 115,
-    LEFT_KEY = 97,
-    RIGHT_KEY = 100,
+    W_KEY = 119,
+    S_KEY = 115,
+    A_KEY = 97,
+    D_KEY = 100,
+	LEFT_KEY = 106;
+	RIGHT_KEY = 107
     ESC = 65307
 };
 # else
 
 enum e_keycode
 {
-    UP_KEY = 13,
-    DOWN_KEY = 1,
-    LEFT_KEY = 0,
-    RIGHT_KEY = 2,
+    W_KEY = 13,
+    S_KEY = 1,
+    A_KEY = 0,
+    D_KEY = 2,
+	LEFT_KEY = 123,
+	RIGHT_KEY = 124,
     ESC = 53
 };
 # endif
@@ -53,12 +57,14 @@ typedef struct s_player
 	double	pl_y;
 	double	pldir_x;
 	double	pldir_y;
+	double	old_pldir_x;
 }	t_player;
 
 typedef struct s_raycast
 {
 	double	plane_x;
 	double	plane_y;
+	double	old_plane_x;
 	double	raydir_x;
 	double	raydir_y;
 	double	camera_x;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 09:15:23 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/22 14:24:15 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/23 10:55:51 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,18 @@ void	ver_line(int x, t_game *game)
 {
 	t_raycast	*ray;
 	int			color;
+	int 		ceiling;
 
 	ray = game->ray;
+	ceiling = ray->draw_start;
+	while (--ceiling >= 0)
+		mlx_pixel_put(game->mlx, game->mlx_win, \
+				x, ceiling, 0x3366ff);
 	if (game->map->map[ray->map_x][ray->map_y] == '1')
 		color = 0x40E0D0;
 	if (game->map->map[ray->map_x][ray->map_y] == '2')
 		color = 0xFF5555;
-	while (++ray->draw_start <= ray->draw_end)
+	while (ray->draw_start < ray->draw_end)
 	{
 		if (ray->side == 1)
 			mlx_pixel_put(game->mlx, game->mlx_win, \
@@ -30,7 +35,12 @@ void	ver_line(int x, t_game *game)
 		else
 			mlx_pixel_put(game->mlx, game->mlx_win, \
 				x, ray->draw_start, color);
+		ray->draw_start++;
 	}
+	ray->draw_end--;
+	while (++ray->draw_end <= 480)
+		mlx_pixel_put(game->mlx, game->mlx_win, \
+				x, ray->draw_end, 0xffffcc);
 }
 
 void	raycasting(t_game *game)
