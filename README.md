@@ -16,7 +16,7 @@ sudo apt install gcc make xorg libxext-dev libbsd-dev
 Follow the instructions from this repository https://github.com/codam-coding-college/MLX42
 
 ## Usage
-`make` and execute `./cub3d maps/full.cub`. For example:
+`make` and execute `./cub3d maps/<map file>.cub`. For example:
 ```
 ./cub3d maps/full.cub
 ```
