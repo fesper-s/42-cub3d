@@ -7,7 +7,16 @@
 This project is inspired by the world-famous eponymous 90's game, which was the first FPS ever. It will enable you to explore ray-casting. Your goal will be to make a dynamic view inside a maze, in which you'll have to find your way. 
 
 ## Requirements
-### Linux/Debian
+### For Linux (Debian-based)
 ```
 sudo apt install gcc make xorg libxext-dev libbsd-dev
+```
+
+### For Windows 10/11 (with WSL2)
+Follow the instructions from this repository https://github.com/codam-coding-college/MLX42
+
+## Usage
+`make` and execute `./cub3d maps/full.cub`. For example:
+```
+./cub3d maps/full.cub
 ```
