@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 11:53:10 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/23 12:06:13 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/24 14:28:25 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ int	atoi_hex(const char *str, int i, int len, long nbr)
 		else
 			return (0);
 	}
+	printf("saiu do atoi_hex\n");
 	return (sign * nbr);
 }

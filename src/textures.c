@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 12:50:03 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/23 13:35:33 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/24 14:35:24 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,29 +127,47 @@ char	**get_texture_line(int fd)
 
 int	**convert_texture(char **texture_line, char **hex_color)
 {
-	int	**texture;
-	int	i;
-	int	j;
-	int	k;
-	int	l;
-	int	m;
+	int		**texture;
+	char	*texture_char;
+	char	**buffer;
+	int		i;
+	int		j;
 
-	i = -1;
-	k = -1;
-	l = -1;
-	m = -1;
+	i = 0;
+	j = -1;
 	texture = malloc(sizeof(int *) * 64);
-	while (texture_line[++i])
+	buffer = hex_color;
+	while (*texture_line)
 	{
-		j = -1;
-		while (texture_line[i][++j])
+		texture_char = *texture_line;
+		while (*texture_char)
 		{
-			if (hex_color[++k][0] == texture_line[i][j])
-			while (m != 64)
-				texture[++l] = atoi_hex(&hex_color[k][1], -1, \
-					ft_strlen(&hex_color[k][1]), 0);
+			hex_color = buffer;
+			while (*hex_color)
+			{
+				if (*texture_char == *hex_color[0])
+				{
+					while (++j <= 64)
+					{
+						if (j == 64)
+						{
+							j = 0;
+							i++;
+						}
+						printf("antes do atoi_hex\n");
+						texture[i][j] = atoi_hex(&(*hex_color)[1], -1, \
+							ft_strlen(&(*hex_color)[1]), 0);
+						printf("depois do atoi_hex\n");
+						printf("%d\n", texture[i][j]);
+					}
+				}
+				hex_color++;
+			}
+			texture_char++;
 		}
+		texture_line++;
 	}
+	printf("return\n");
 	return (texture);
 }
 
@@ -159,9 +177,7 @@ int	**get_texture(void)
 	char	**hex_color;
 	char	**texture_line;
 	int		**texture;
-	int		i;
 
-	printf("é este -> %d\n", atoi_hex("00FF00", -1, ft_strlen("00FF00") - 1, 0));
 	fd = open("./textures/bluestone.xpm", O_RDONLY);
 	hex_color = get_hex_color(fd);
 	close(fd);
@@ -171,10 +187,5 @@ int	**get_texture(void)
 	texture = convert_texture(texture_line, hex_color);
 	free_charpp(hex_color);
 	free_charpp(texture_line);
-	i = -1;
-	while (i != 64)
-	{
-		printf("----> %d\n", texture[i][0]);
-	}
 	return (texture);
 }
