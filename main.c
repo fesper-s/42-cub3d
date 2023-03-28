@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/23 10:28:45 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/28 09:56:11 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,89 +19,20 @@ int	close_game(t_game *game)
 	return (0);
 }
 
-int	key_event(int key, t_game *game)
+int	game_loop(t_game *game)
 {
-	t_player	*pl;
-	t_raycast	*ray;
-
-	pl = game->pl;
-	ray = game->ray;
-	printf("position_x--> %f\n", game->pl->pl_x);
-	printf("position_y--> %f\n", game->pl->pl_y);
-	printf("direction_x--> %f\n", game->pl->pldir_x);
-	printf("direction_y--> %f\n", game->pl->pldir_y);
-	if (key == W_KEY)
-	{
-		if (game->map->map[(int)(pl->pl_x + pl->pldir_x * 0.2)][(int)pl->pl_y] == '0')
-			pl->pl_x += pl->pldir_x * 0.2;
-      	if (game->map->map[(int)(pl->pl_x)][(int)(pl->pl_y + pl->pldir_y * 0.2)] == '0')
-	  		pl->pl_y += pl->pldir_y * 0.2;
-		mlx_clear_window(game->mlx, game->mlx_win);
-		raycasting(game);
-    }
-	
-	if (key == S_KEY)
-	{
-		if (game->map->map[(int)(pl->pl_x - pl->pldir_x * 0.2)][(int)pl->pl_y] == '0')
-			pl->pl_x -= pl->pldir_x * 0.2;
-      	if (game->map->map[(int)(pl->pl_x)][(int)(pl->pl_y - pl->pldir_y * 0.2)] == '0')
-	  		pl->pl_y -= pl->pldir_y * 0.2;
-		mlx_clear_window(game->mlx, game->mlx_win);
-		raycasting(game);
-    }
-
-	if (key == D_KEY)
-	{
-		if (game->map->map[(int)(pl->pl_x + ray->plane_x * 0.2)][(int)pl->pl_y] == '0')
-			pl->pl_x += ray->plane_x * 0.2;
-		printf("cheguei\n");
-		if (game->map->map[(int)pl->pl_x][(int)(pl->pl_y + ray->plane_y * 0.2)] == '0')
-			pl->pl_y += ray->plane_y * 0.2;
-		mlx_clear_window(game->mlx, game->mlx_win);
-		raycasting(game);
-    }
-
-
-	if (key == A_KEY)
-	{
-		if (game->map->map[(int)(pl->pl_x - ray->plane_x * 0.2)][(int)pl->pl_y] == '0')
-			pl->pl_x -= ray->plane_x * 0.2;
-		printf("cheguei\n");
-		if (game->map->map[(int)pl->pl_x][(int)(pl->pl_y - ray->plane_y * 0.2)] == '0')
-			pl->pl_y -= ray->plane_y * 0.2;
-		mlx_clear_window(game->mlx, game->mlx_win);
-		raycasting(game);
-	}
-
-	if (key == RIGHT_KEY)
-	{
-		pl->old_pldir_x = pl->pldir_x;
-      	pl->pldir_x = pl->pldir_x * cos(0.1) - pl->pldir_y * sin(0.1);
-      	pl->pldir_y = pl->old_pldir_x * sin(0.1) + pl->pldir_y * cos(0.1);
-      	ray->old_plane_x = ray->plane_x;
-      	ray->plane_x = ray->plane_x * cos(0.1) - ray->plane_y * sin(0.1);
-     	ray->plane_y = ray->old_plane_x * sin(0.1) + ray->plane_y * cos(0.1);
-		mlx_clear_window(game->mlx, game->mlx_win);
-		raycasting(game);
-	}
-
-	if (key == LEFT_KEY)
-	{
-		pl->old_pldir_x = pl->pldir_x;
-      	pl->pldir_x = pl->pldir_x * cos(-0.1) - pl->pldir_y * sin(-0.1);
-      	pl->pldir_y = pl->old_pldir_x * sin(-0.1) + pl->pldir_y * cos(-0.1);
-      	ray->old_plane_x = ray->plane_x;
-      	ray->plane_x = ray->plane_x * cos(-0.1) - ray->plane_y * sin(-0.1);
-     	ray->plane_y = ray->old_plane_x * sin(-0.1) + ray->plane_y * cos(-0.1);
-		mlx_clear_window(game->mlx, game->mlx_win);
-		raycasting(game);
-	}
+	raycasting(game);
+	handle_keys(game);
+	//mlx_clear_window(game->mlx, game->mlx_win);
 	return (0);
 }
 
 int	cub3d(char *path, t_map *map, t_game *game)
 {
+	//checagem e tratamento de erro do mapa
 	check_map(path, map);
+
+	//inicialização de váriaveis
 	game->pl->pl_x = 0;
 	game->pl->pl_y = 0;
 	game->pl->pldir_x = 0;
@@ -115,15 +46,24 @@ int	cub3d(char *path, t_map *map, t_game *game)
 	game->ray->plane_y = 0.66;
 	game->pl->old_pldir_x = 0;
 	game->ray->old_plane_x = 0;
+
+	//inicialização da variável posição e direção do player
 	pl_pos(game, map);
+
+	//jogo começa
 	game->mlx = mlx_init();
 	game->mlx_win = mlx_new_window(game->mlx, 640, 480, "Wolfenstein 3D");
-	printf("position_x--> %f\n", game->pl->pl_x);
-	printf("position_y--> %f\n", game->pl->pl_y);
 	raycasting(game);
-	//mlx_key_hook(game->mlx_win, key_event, game);
-	mlx_hook(game->mlx_win, 2, 0, key_event, game);
+	//permite utilizar o teclado para se movimentar no jogo
+	mlx_hook(game->mlx_win, 2, (1L << 0), key_press, game);
+
+	mlx_hook(game->mlx_win, 3, (1L << 1), key_release, game);
+
+	//permite fechar a janela ao apertar no X, enviando para uma função de exiting game
 	mlx_hook(game->mlx_win, 17, 0, close_game, game);
+
+	mlx_loop_hook(game->mlx, game_loop, game);
+
 	mlx_loop(game->mlx);
 	return (1);
 }
