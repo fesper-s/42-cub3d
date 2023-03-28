@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:50:20 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/06/13 14:02:26 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/23 10:12:45 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*read_line(int fd, char *holder)
 	if (!buffer)
 		return (NULL);
 	b_size = 1;
-	while (!ft_strchr(holder, '\n') && b_size)
+	while (!gnl_strchr(holder, '\n') && b_size)
 	{
 		b_size = read(fd, buffer, BUFFER_SIZE);
 		if (b_size == -1)
@@ -35,7 +35,7 @@ static char	*read_line(int fd, char *holder)
 			holder = malloc(1 * sizeof(char));
 			*holder = '\0';
 		}
-		holder = ft_strjoin(holder, buffer);
+		holder = gnl_strjoin(holder, buffer);
 	}
 	free(buffer);
 	return (holder);
@@ -80,7 +80,7 @@ static char	*hold_line(char *holder)
 		free(holder);
 		return (NULL);
 	}
-	str = malloc((ft_strlen(holder) - len + 1) * sizeof(char));
+	str = malloc((gnl_strlen(holder) - len + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	len++;

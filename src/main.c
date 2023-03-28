@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/28 09:56:11 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/28 13:00:54 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (print_error("Invalid number of arguments"));
+	get_texture();
 	game.ray = &ray;
 	game.pl = &pl;
 	cub3d(argv[1], &map, &game);

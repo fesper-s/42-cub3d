@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/23 13:09:13 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/28 13:01:41 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,9 @@ int		check_sprites(t_map *map);
 void	pl_pos(t_game *game, t_map *map);
 void	init_var(t_game *game);
 
+// textures.c
+int		**get_texture(void);
+
 //raycast.c
 void	raycasting(t_game *game);
 
@@ -149,15 +152,19 @@ int		key_event(int key, t_game *game);
 int		key_press(int key, t_game *game);
 int		key_release(int key, t_game *game);
 
-
-
-// error.c
-int		print_error(char *msg);
-
 // utils.c
 int		ft_strrncmp(char *s1, char *s2, int len);
 void	replace_char(char *str, char old, char new);
 void	free_map(t_map *map);
 int		char_in_str(char *str, char c);
+
+//
+int		ft_atoi_base(const char *str, int str_base);
+
+// error.c
+int		print_error(char *msg);
+
+// memory.c
+void	free_charpp(char **ptr);
 
 #endif
