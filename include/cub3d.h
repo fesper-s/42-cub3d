@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/28 08:26:57 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/28 13:01:41 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,57 @@
 # include <unistd.h>
 # include <math.h>
 
+# ifdef __linux__
+
+enum e_keycode
+{
+    W_KEY = 119,
+    S_KEY = 115,
+    A_KEY = 97,
+    D_KEY = 100,
+	LEFT_KEY = 106;
+	RIGHT_KEY = 107
+    ESC = 65307
+};
+# else
+
+enum e_keycode
+{
+    W_KEY = 13,
+    S_KEY = 1,
+    A_KEY = 0,
+    D_KEY = 2,
+	LEFT_KEY = 123,
+	RIGHT_KEY = 124,
+    ESC = 53
+};
+# endif
+
+typedef struct s_keys
+{
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+	int	left;
+	int	right;
+}	t_keys;
+
+
 typedef struct s_player
 {
 	double	pl_x;
 	double	pl_y;
 	double	pldir_x;
 	double	pldir_y;
-} t_player;
+	double	old_pldir_x;
+}	t_player;
 
 typedef struct s_raycast
 {
 	double	plane_x;
 	double	plane_y;
+	double	old_plane_x;
 	double	raydir_x;
 	double	raydir_y;
 	double	camera_x;
@@ -49,14 +88,15 @@ typedef struct s_raycast
 	int		map_x;
 	int		map_y;
 	double	camera_wall;
-	int 	hit;
+	int		hit;
 	int		side;
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-
-
-} t_raycast;
+	double	wall_x;
+	int		texNum;
+	int		tex_x;
+}	t_raycast;
 
 typedef struct s_map
 {
@@ -67,22 +107,21 @@ typedef struct s_map
 	char	*west;
 	char	*floor;
 	char	*ceiling;
-} t_map;
+}	t_map;
 
 typedef struct s_game
 {
-	int		width;
-	int		height;
-	double	frame;
-	double	old_frame;
-
-	void	*mlx;
-	void	*mlx_win;
-	
-	struct	s_map		*map;
-	struct	s_player	*pl;
-	struct	s_raycast	*ray;
-} t_game;
+	int					width;
+	int					height;
+	double				frame;
+	double				old_frame;
+	void				*mlx;
+	void				*mlx_win;
+	struct s_map		*map;
+	struct s_player		*pl;
+	struct s_raycast	*ray;
+	struct s_keys		*keys;
+}	t_game;
 
 // map.c
 int		read_map(char *path, t_map *map);
@@ -94,13 +133,24 @@ int		check_sprites(t_map *map);
 //init.c
 
 void	pl_pos(t_game *game, t_map *map);
-void	init_var(t_map *map, t_game *game);
+void	init_var(t_game *game);
 
 // textures.c
 int		**get_texture(void);
 
 //raycast.c
 void	raycasting(t_game *game);
+
+//movement.c
+void	vertical_movement(int key, t_game *game, double speed);
+void	horizontal_movement(int key, t_game *game, double speed);
+void	camera_movement(int key, t_game *game, double speed);
+void	handle_keys(t_game *game);
+
+//create a event.c file and put these in
+int		key_event(int key, t_game *game);
+int		key_press(int key, t_game *game);
+int		key_release(int key, t_game *game);
 
 // utils.c
 int		ft_strrncmp(char *s1, char *s2, int len);
