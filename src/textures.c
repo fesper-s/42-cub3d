@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 12:50:03 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/28 11:01:03 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/28 12:39:56 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,19 @@ char	**get_hex_color(int fd)
 			{
 				line = check_line(line);
 				aux = ft_strjoin(hex_line, line);
-				//free(hex_line);
+				free(hex_line);
 				hex_line = ft_strdup(aux);
-				//free(aux);
-				//free(line);
+				free(aux);
+				free(line);
 				line = get_next_line(fd);
 			}
 			break ;
 		}
-		//free(line);
+		free(line);
 		line = get_next_line(fd);
 	}
 	hex_color = ft_split(hex_line, '\n');
-	//free(hex_line);
+	free(hex_line);
 	return (hex_color);
 }
 
@@ -87,7 +87,7 @@ static char	*check_texture_line(char *line)
 		new_line[++j] = line[i];
 	}
 	new_line[j + 1] = 0;
-	//free(line);
+	free(line);
 	return (new_line);
 }
 
@@ -104,24 +104,26 @@ char	**get_texture_line(int fd)
 	{
 		if (!ft_strncmp(line, "/* pixels */", 12))
 		{
+			free(line);
 			line = get_next_line(fd);
 			while (ft_strncmp(line, "};", 2))
 			{
 				line = check_texture_line(line);
 				aux = ft_strjoin(buffer, line);
-				//free(buffer);
+				free(buffer);
 				buffer = ft_strdup(aux);
-				//free(aux);
-				//free(line);
+				free(aux);
+				free(line);
 				line = get_next_line(fd);
 			}
 			break ;
 		}
-		//free(line);
+		free(line);
 		line = get_next_line(fd);
 	}
+	free(line);
 	texture_line = ft_split(buffer, '\n');
-	//free(buffer);
+	free(buffer);
 	return (texture_line);
 }
 
