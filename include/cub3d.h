@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/28 13:01:41 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/28 14:06:29 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,10 @@ typedef struct s_map
 	char	*south;
 	char	*east;
 	char	*west;
+	int		**n_texture;
+	int		**s_texture;
+	int		**e_texture;
+	int		**w_texture;
 	char	*floor;
 	char	*ceiling;
 }	t_map;
@@ -136,7 +140,18 @@ void	pl_pos(t_game *game, t_map *map);
 void	init_var(t_game *game);
 
 // textures.c
-int		**get_texture(void);
+char	*check_line(char *line);
+char	**get_hex_color(int fd);
+char	*check_texture_line(char *line);
+char	**get_texture_line(int fd);
+int		**convert_texture(char **texture_line, char **hex_color);
+
+// texture_direction.c
+void	get_north_texture(t_map *map);
+void	get_south_texture(t_map *map);
+void	get_east_texture(t_map *map);
+void	get_west_texture(t_map *map);
+void	get_texture(t_map *map);
 
 //raycast.c
 void	raycasting(t_game *game);
@@ -163,6 +178,7 @@ int		ft_atoi_base(const char *str, int str_base);
 
 // error.c
 int		print_error(char *msg);
+void	exit_error(char *msg);
 
 // memory.c
 void	free_charpp(char **ptr);

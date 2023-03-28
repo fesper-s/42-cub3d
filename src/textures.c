@@ -6,13 +6,13 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 12:50:03 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/28 12:39:56 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/28 14:02:44 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static char	*check_line(char *line)
+char	*check_line(char *line)
 {
 	char	*new_line;
 	int		i;
@@ -66,7 +66,7 @@ char	**get_hex_color(int fd)
 	return (hex_color);
 }
 
-static char	*check_texture_line(char *line)
+char	*check_texture_line(char *line)
 {
 	char	*new_line;
 	int		i;
@@ -158,24 +158,5 @@ int	**convert_texture(char **texture_line, char **hex_color)
 		}
 		texture_line++;
 	}
-	return (texture);
-}
-
-int	**get_texture(void)
-{
-	int		fd;
-	char	**hex_color;
-	char	**texture_line;
-	int		**texture;
-
-	fd = open("./textures/bluestone.xpm", O_RDONLY);
-	hex_color = get_hex_color(fd);
-	close(fd);
-	fd = open("./textures/bluestone.xpm", O_RDONLY);
-	texture_line = get_texture_line(fd);
-	close(fd);
-	texture = convert_texture(texture_line, hex_color);
-	free_charpp(hex_color);
-	free_charpp(texture_line);
 	return (texture);
 }
