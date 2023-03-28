@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/23 13:34:05 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/28 09:56:11 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	close_game(t_game *game)
 
 int	game_loop(t_game *game)
 {
-	handle_keys(game);
-	mlx_clear_window(game->mlx, game->mlx_win);
 	raycasting(game);
+	handle_keys(game);
+	//mlx_clear_window(game->mlx, game->mlx_win);
 	return (0);
 }
 
@@ -53,7 +53,7 @@ int	cub3d(char *path, t_map *map, t_game *game)
 	//jogo começa
 	game->mlx = mlx_init();
 	game->mlx_win = mlx_new_window(game->mlx, 640, 480, "Wolfenstein 3D");
-
+	raycasting(game);
 	//permite utilizar o teclado para se movimentar no jogo
 	mlx_hook(game->mlx_win, 2, (1L << 0), key_press, game);
 
