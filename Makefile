@@ -6,14 +6,14 @@
 #    By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 08:12:43 by fesper-s          #+#    #+#              #
-#    Updated: 2023/03/23 12:08:02 by fesper-s         ###   ########.fr        #
+#    Updated: 2023/03/28 08:27:16 by fesper-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= cub3d
 
 SRCS	= ./src/main.c ./src/textures.c ./src/map.c  ./src/check.c \
-		  ./src/init.c ./src/raycast.c ./src/utils.c ./src/atoi_hex.c \
+		  ./src/init.c ./src/raycast.c ./src/utils.c ./src/ft_atoi_base.c \
 		  ./src/error.c ./src/memory.c
 
 OBJS	= $(SRCS:.c=.o)

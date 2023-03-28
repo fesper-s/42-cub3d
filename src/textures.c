@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 12:50:03 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/24 14:35:24 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/28 11:01:03 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,41 +133,29 @@ int	**convert_texture(char **texture_line, char **hex_color)
 	int		i;
 	int		j;
 
-	i = 0;
-	j = -1;
+	i = -1;
 	texture = malloc(sizeof(int *) * 64);
 	buffer = hex_color;
 	while (*texture_line)
 	{
+		texture[++i] = malloc(sizeof(int) * 64);
 		texture_char = *texture_line;
+		j = -1;
 		while (*texture_char)
 		{
+			if (j < 63)
+				j++;
 			hex_color = buffer;
 			while (*hex_color)
 			{
 				if (*texture_char == *hex_color[0])
-				{
-					while (++j <= 64)
-					{
-						if (j == 64)
-						{
-							j = 0;
-							i++;
-						}
-						printf("antes do atoi_hex\n");
-						texture[i][j] = atoi_hex(&(*hex_color)[1], -1, \
-							ft_strlen(&(*hex_color)[1]), 0);
-						printf("depois do atoi_hex\n");
-						printf("%d\n", texture[i][j]);
-					}
-				}
+					texture[i][j] = ft_atoi_base(&(*hex_color)[1], 16);
 				hex_color++;
 			}
 			texture_char++;
 		}
 		texture_line++;
 	}
-	printf("return\n");
 	return (texture);
 }
 

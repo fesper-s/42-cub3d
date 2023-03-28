@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/23 12:05:42 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/28 08:26:57 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ void	replace_char(char *str, char old, char new);
 void	free_map(t_map *map);
 int		char_in_str(char *str, char c);
 
-int		atoi_hex(const char *str, int i, int len, long nbr);
+//
+int		ft_atoi_base(const char *str, int str_base);
 
 // error.c
 int		print_error(char *msg);

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   atoi_hex.c                                         :+:      :+:    :+:   */
+/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 11:53:10 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/24 14:28:25 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/28 10:00:32 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	ft_strnchr(char *s, int c, int size)
+int	ft_strnchr(char *s, int c, int size)
 {
 	int	i;
 
@@ -26,49 +26,31 @@ static int	ft_strnchr(char *s, int c, int size)
 	return (0);
 }
 
-static char	to_upper(int c)
+int	ft_atoi_base(const char *str, int str_base)
 {
-	if (c >= 'a' && c <= 'z')
-		c -= 32;
-	return (c);
-}
+	int	nbr;
+	int	temp;
+	int	aux;
+	int	i;
+	int	len;
 
-static int	to_power(int nbr, int power)
-{
-	int	result;
-
-	result = 1;
-	if (power == 0)
-		return (1);
-	if (power == 1)
-		return (nbr);
-	while (power--)
-		result *= nbr;
-	return (result);
-}
-
-int	atoi_hex(const char *str, int i, int len, long nbr)
-{
-	int		temp;
-	int		temp2;
-	int		sign;
-
+	nbr = 0;
 	temp = 0;
-	temp2 = 0;
-	sign = 1;
+	aux = 0;
+	i = -1;
+	len = ft_strlen(str) - 1;
 	while (str[++i])
 	{
-		if (ft_strnchr("0123456789ABCDEF", to_upper(str[i]), 16) || \
+		if (ft_strnchr("0123456789ABCDEF", ft_toupper(str[i]), str_base) || \
 			str[i] == '0')
 		{
-			temp = ft_strnchr("0123456789ABCDEF", to_upper(str[i]), 16);
-			temp2 = to_power(16, len);
-			nbr += temp * temp2;
+			temp = ft_strnchr("0123456789ABCDEF", ft_toupper(str[i]), str_base);
+			aux = pow(str_base, len);
+			nbr += temp * aux;
 			len--;
 		}
 		else
 			return (0);
 	}
-	printf("saiu do atoi_hex\n");
-	return (sign * nbr);
+	return (nbr);
 }
