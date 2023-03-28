@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/28 13:00:54 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/28 13:35:21 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	game_loop(t_game *game)
 {
 	raycasting(game);
 	handle_keys(game);
-	//mlx_clear_window(game->mlx, game->mlx_win);
+
 	return (0);
 }
 
@@ -33,16 +33,16 @@ int	cub3d(char *path, t_map *map, t_game *game)
 	check_map(path, map);
 
 	//inicialização de váriaveis
-	game->pl->pl_x = 0;
-	game->pl->pl_y = 0;
-	game->pl->pldir_x = 0;
-	game->pl->pldir_y = 0;
+	game->pl->pl_x = 0.0001;
+	game->pl->pl_y = 0.0001;
+	game->pl->pldir_x = 0.0001;
+	game->pl->pldir_y = 0.0001;
 	game->frame = 0;
 	game->old_frame = 0;
 	game->map = map;
 	game->height = 480;
 	game->width = 640;
-	game->ray->plane_x = 0;
+	game->ray->plane_x = 0.0;
 	game->ray->plane_y = 0.66;
 	game->pl->old_pldir_x = 0;
 	game->ray->old_plane_x = 0;
@@ -52,12 +52,12 @@ int	cub3d(char *path, t_map *map, t_game *game)
 
 	//jogo começa
 	game->mlx = mlx_init();
-	game->mlx_win = mlx_new_window(game->mlx, 640, 480, "Wolfenstein 3D");
+	game->mlx_win = mlx_new_window(game->mlx, 640, 480, "Cub3D");
 	raycasting(game);
 	//permite utilizar o teclado para se movimentar no jogo
-	mlx_hook(game->mlx_win, 2, (1L << 0), key_press, game);
+	mlx_hook(game->mlx_win, 2, 0, key_press, game);
 
-	mlx_hook(game->mlx_win, 3, (1L << 1), key_release, game);
+	mlx_hook(game->mlx_win, 3, 0, key_release, game);
 
 	//permite fechar a janela ao apertar no X, enviando para uma função de exiting game
 	mlx_hook(game->mlx_win, 17, 0, close_game, game);

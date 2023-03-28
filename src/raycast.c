@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 09:15:23 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/28 09:25:58 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/28 13:37:58 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ void	raycasting(t_game *game)
 			ray->draw_end = game->height - 1;
   
       //give x and y sides different brightness
-      //if (side == 1) {color = color / 2;}
 		ver_line(x, game);
 	}
 }

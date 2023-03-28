@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:02:24 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/28 12:45:55 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/28 13:14:17 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,15 +118,15 @@ int	key_press(int key, t_game *game)
 {
 	if (key == W_KEY)
 		game->keys->w = 1;
-	else if (key == A_KEY)
+	if (key == A_KEY)
 		game->keys->a = 1;
-	else if (key == S_KEY)
+	if (key == S_KEY)
 		game->keys->s = 1;
-	else if (key == D_KEY)
+	if (key == D_KEY)
 		game->keys->d = 1;
-	else if (key == RIGHT_KEY)
+	if (key == RIGHT_KEY)
 		game->keys->right = 1;
-	else if (key == LEFT_KEY)
+	if (key == LEFT_KEY)
 		game->keys->left = 1;
 	return (0);
 }
@@ -135,15 +135,15 @@ int	key_release(int key, t_game *game)
 {
 	if (key == W_KEY)
 		game->keys->w = 0;
-	else if (key == A_KEY)
+	if (key == A_KEY)
 		game->keys->a = 0;
-	else if (key == S_KEY)
+	if (key == S_KEY)
 		game->keys->s = 0;
-	else if (key == D_KEY)
+	if (key == D_KEY)
 		game->keys->d = 0;
-	else if (key == RIGHT_KEY)
+	if (key == RIGHT_KEY)
 		game->keys->right = 0;
-	else if (key == LEFT_KEY)
+	if (key == LEFT_KEY)
 		game->keys->left = 0;
 	return (0);
 }
