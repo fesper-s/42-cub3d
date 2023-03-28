@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/28 13:35:21 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/28 14:11:13 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,6 @@ int	main(int argc, char **argv)
 	game.ray = &ray;
 	game.pl = &pl;
 	cub3d(argv[1], &map, &game);
-	int i = -1;
-	while (game.map->map[++i])
-		printf("%s\n", game.map->map[i]);
-	printf("player dir_x--> %f\n", game.pl->pldir_x);
-	printf("player dir_y--> %f\n", game.pl->pldir_y);
 	free_map(&map);
 	return (0);
 }
