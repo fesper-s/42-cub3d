@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 09:15:23 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/28 13:37:58 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/28 14:34:50 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,17 @@ void	raycasting(t_game *game)
 	while (++x < game->width)
 	{
 		init_var(game);
-		ray->camera_x = 2 * x / (double)(game->width) - 1;
+		game->ray->camera_x = 2 * x / (float)(game->width) - 1;
 		ray->raydir_x = pl->pldir_x + ray->plane_x * ray->camera_x;
 		ray->raydir_y = pl->pldir_y + ray->plane_y * ray->camera_x;
 		if (ray->raydir_x == 0)
 			ray->raydir_x = 1e30;
+		else
+			ray->delta_x = sqrt(1 + pow(ray->raydir_y, 2) / pow(ray->raydir_x, 2));
 		if (ray->raydir_y == 0)
 			ray->raydir_y = 1e30;
-		ray->delta_x = sqrt(1 + pow(ray->raydir_y, 2) / pow(ray->raydir_x, 2));
-		ray->delta_y = sqrt(1 + pow(ray->raydir_x, 2) / pow(ray->raydir_y, 2));
+		else
+			ray->delta_y = sqrt(1 + pow(ray->raydir_x, 2) / pow(ray->raydir_y, 2));
 		//calculando step e distancia dos sides
 		if (ray->raydir_x < 0)
 		{
