@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:34:37 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/29 12:25:56 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/29 12:43:08 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	camera_movement(int key, t_game *game, double speed)
       	pl->pldir_x = pl->pldir_x * cos(speed) - pl->pldir_y * sin(speed);
       	pl->pldir_y = pl->old_pldir_x * sin(speed) + pl->pldir_y * cos(speed);
       	ray->old_plane_x = ray->plane_x;
-      	ray->plane_x = ray->plane_x * cos(speed)- ray->plane_y * sin(speed)* 0.;
+      	ray->plane_x = ray->plane_x * cos(speed)- ray->plane_y * sin(speed);
      	ray->plane_y = ray->old_plane_x * sin(speed) + ray->plane_y * cos(speed);
 	}
 	else if (key == LEFT_KEY)
@@ -108,9 +108,9 @@ void	handle_keys(t_game *game)
 	if (keys->right != keys->left)
 	{
 		if (keys->right == 1)
-			camera_movement(RIGHT_KEY, game, speed);
+			camera_movement(RIGHT_KEY, game, 0.1);
 		else if (keys->left == 1)
-			camera_movement(LEFT_KEY, game, speed);
+			camera_movement(LEFT_KEY, game, 0.1);
 	}
 }
 
