@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/23 12:02:24 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/28 12:45:55 by gussoare         ###   ########.fr       */
+/*   Created: 2023/03/29 11:34:37 by gussoare          #+#    #+#             */
+/*   Updated: 2023/03/29 12:25:56 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,20 @@ void	camera_movement(int key, t_game *game, double speed)
 	if (key == RIGHT_KEY)
 	{
 		pl->old_pldir_x = pl->pldir_x;
-      	pl->pldir_x = pl->pldir_x * cos((speed) * 0.1) - pl->pldir_y * sin((speed)* 0.1);
-      	pl->pldir_y = pl->old_pldir_x * sin((speed)* 0.1) + pl->pldir_y * cos((speed) * 0.1);
+      	pl->pldir_x = pl->pldir_x * cos(speed) - pl->pldir_y * sin(speed);
+      	pl->pldir_y = pl->old_pldir_x * sin(speed) + pl->pldir_y * cos(speed);
       	ray->old_plane_x = ray->plane_x;
-      	ray->plane_x = ray->plane_x * cos((speed)* 0.1)- ray->plane_y * sin((speed)* 0.1);
-     	ray->plane_y = ray->old_plane_x * sin((speed)* 0.1) + ray->plane_y * cos((speed) * 0.1);
+      	ray->plane_x = ray->plane_x * cos(speed)- ray->plane_y * sin(speed)* 0.;
+     	ray->plane_y = ray->old_plane_x * sin(speed) + ray->plane_y * cos(speed);
 	}
 	else if (key == LEFT_KEY)
 	{
 		pl->old_pldir_x = pl->pldir_x;
-      	pl->pldir_x = pl->pldir_x * cos(-speed  * 0.1) - pl->pldir_y * sin(-speed * 0.1);
-      	pl->pldir_y = pl->old_pldir_x * sin(-speed * 0.1) + pl->pldir_y * cos(-speed * 0.1);
+      	pl->pldir_x = pl->pldir_x * cos(-speed) - pl->pldir_y * sin(-speed);
+      	pl->pldir_y = pl->old_pldir_x * sin(-speed) + pl->pldir_y * cos(-speed);
       	ray->old_plane_x = ray->plane_x;
-      	ray->plane_x = ray->plane_x * cos(-speed * 0.1) - ray->plane_y * sin(-speed * 0.1);
-     	ray->plane_y = ray->old_plane_x * sin(-speed * 0.1) + ray->plane_y * cos(-speed * 0.1);
+      	ray->plane_x = ray->plane_x * cos(-speed) - ray->plane_y * sin(-speed);
+     	ray->plane_y = ray->old_plane_x * sin(-speed) + ray->plane_y * cos(-speed);
 	}
 }
 
@@ -90,7 +90,7 @@ void	handle_keys(t_game *game)
 	float		speed;
 
 	keys = game->keys;
-	speed = 0.2;
+	speed = 1;
 	if (keys->w != keys->s)
 	{
 		if (keys->w == 1)
@@ -108,9 +108,9 @@ void	handle_keys(t_game *game)
 	if (keys->right != keys->left)
 	{
 		if (keys->right == 1)
-			camera_movement(RIGHT_KEY, game, 1);
+			camera_movement(RIGHT_KEY, game, speed);
 		else if (keys->left == 1)
-			camera_movement(LEFT_KEY, game, 1);
+			camera_movement(LEFT_KEY, game, speed);
 	}
 }
 

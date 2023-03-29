@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/29 10:59:02 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/29 12:24:50 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	game_loop(t_game *game)
 {
 	raycasting(game);
 	handle_keys(game);
-	//mlx_clear_window(game->mlx, game->mlx_win);
 	return (0);
 }
 
@@ -47,6 +46,18 @@ int	cub3d(char *path, t_map *map, t_game *game)
 	game->ray->plane_y = 0.66;
 	game->pl->old_pldir_x = 0;
 	game->ray->old_plane_x = 0;
+	game->ray->camera_wall = 0;
+	game->ray->step_x = 0;
+	game->ray->step_y = 0;
+	game->ray->side_x = 0;
+	game->ray->side_y = 0;
+	game->keys->w = 0;
+	game->keys->a = 0;
+	game->keys->s = 0;
+	game->keys->d = 0;
+	game->keys->left = 0;
+	game->keys->right = 0;
+
 
 	//inicialização da variável posição e direção do player
 	pl_pos(game, map);
@@ -61,9 +72,9 @@ int	cub3d(char *path, t_map *map, t_game *game)
 	mlx_hook(game->mlx_win, 3, (1L << 1), key_release, game);
 
 	//permite fechar a janela ao apertar no X, enviando para uma função de exiting game
-	mlx_hook(game->mlx_win, 17, 0, close_game, game);
+	mlx_hook(game->mlx_win, 17, (1L << 17), close_game, game);
 
-	mlx_loop_hook(game->mlx, &game_loop, game);
+	mlx_loop_hook(game->mlx, game_loop, game);
 
 	mlx_loop(game->mlx);
 	return (1);
@@ -75,17 +86,14 @@ int	main(int argc, char **argv)
 	t_game		game;
 	t_raycast	ray;
 	t_player	pl;
+	t_keys		key;
 
 	if (argc != 2)
 		return (print_error("Invalid number of arguments"));
 	game.ray = &ray;
 	game.pl = &pl;
+	game.keys = & key;
 	cub3d(argv[1], &map, &game);
-	int i = -1;
-	while (game.map->map[++i])
-		printf("%s\n", game.map->map[i]);
-	printf("player dir_x--> %f\n", game.pl->pldir_x);
-	printf("player dir_y--> %f\n", game.pl->pldir_y);
 	free_map(&map);
 	return (0);
 }

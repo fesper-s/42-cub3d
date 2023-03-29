@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 09:15:23 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/28 09:25:58 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/29 12:00:53 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,13 @@ void	raycasting(t_game *game)
 		ray->raydir_y = pl->pldir_y + ray->plane_y * ray->camera_x;
 		if (ray->raydir_x == 0)
 			ray->raydir_x = 1e30;
+		else
+			ray->delta_x = sqrt(1 + pow(ray->raydir_y, 2) / pow(ray->raydir_x, 2));
 		if (ray->raydir_y == 0)
 			ray->raydir_y = 1e30;
-		ray->delta_x = sqrt(1 + pow(ray->raydir_y, 2) / pow(ray->raydir_x, 2));
-		ray->delta_y = sqrt(1 + pow(ray->raydir_x, 2) / pow(ray->raydir_y, 2));
+		else
+			ray->delta_y = sqrt(1 + pow(ray->raydir_x, 2) / pow(ray->raydir_y, 2));
+
 		//calculando step e distancia dos sides
 		if (ray->raydir_x < 0)
 		{
@@ -125,8 +128,6 @@ void	raycasting(t_game *game)
 		if (ray->draw_end >= game->height)
 			ray->draw_end = game->height - 1;
   
-      //give x and y sides different brightness
-      //if (side == 1) {color = color / 2;}
 		ver_line(x, game);
 	}
 }

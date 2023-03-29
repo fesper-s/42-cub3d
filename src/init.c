@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:32:20 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/23 09:25:16 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/29 12:01:56 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,4 @@ void	init_var(t_game *game)
 	game->ray->map_y = (int)game->pl->pl_y;
 	game->ray->hit = 0;
 	game->ray->side = 0;
-	game->ray->camera_wall = 0;
 }
