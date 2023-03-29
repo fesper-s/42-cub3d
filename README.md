@@ -20,3 +20,7 @@ Follow the instructions from this repository https://github.com/codam-coding-col
 ```
 ./cub3d maps/full.cub
 ```
+
+##
+
+This Minishell project was developed by [Fabrício Esper](https://github.com/fesper-s) and [Gustavo Soares](https://github.com/Guga-melo).
