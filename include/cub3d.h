@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/29 11:46:30 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/29 17:20:01 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ enum e_keycode
     S_KEY = 115,
     A_KEY = 97,
     D_KEY = 100,
-	LEFT_KEY = 106,
-	RIGHT_KEY = 107,
+	LEFT_KEY = 65361,
+	RIGHT_KEY = 65363,
     ESC = 65307
 };
 # else
@@ -93,9 +93,12 @@ typedef struct s_raycast
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-	double	wall_x;
-	int		texNum;
+	int		tex_id;
 	int		tex_x;
+	int		tex_y;
+	double 	step;
+	double	tex_pos;
+	double	wall_x;
 }	t_raycast;
 
 typedef struct s_map

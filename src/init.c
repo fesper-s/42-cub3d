@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:32:20 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/29 12:01:56 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/29 15:01:22 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,7 @@ void	pl_pos(t_game *game, t_map *map)
 
 void	init_var(t_game *game)
 {
-	game->ray->raydir_x = 0;
-	game->ray->raydir_y = 0;
-	game->ray->camera_x = 0;
 	game->ray->map_x = (int)game->pl->pl_x;
 	game->ray->map_y = (int)game->pl->pl_y;
 	game->ray->hit = 0;
-	game->ray->side = 0;
 }

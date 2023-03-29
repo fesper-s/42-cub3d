@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:34:37 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/29 12:43:08 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/29 16:29:15 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,17 @@ void horizontal_movement(int key, t_game *game, double speed)
 	ray = game->ray;
 	if (key == D_KEY)
 	{
-		if (game->map->map[(int)(pl->pl_x + ray->plane_x *speed)][(int)pl->pl_y] == '0')
-			pl->pl_x += ray->plane_x *speed;
+		if (game->map->map[(int)(pl->pl_x + ray->plane_x * speed)][(int)pl->pl_y] == '0')
+			pl->pl_x += ray->plane_x * speed;
 		if (game->map->map[(int)pl->pl_x][(int)(pl->pl_y + ray->plane_y *speed)] == '0')
-			pl->pl_y += ray->plane_y *speed;
+			pl->pl_y += ray->plane_y * speed;
     }
 	else if (key == A_KEY)
 	{
 		if (game->map->map[(int)(pl->pl_x - ray->plane_x *speed)][(int)pl->pl_y] == '0')
 			pl->pl_x -= ray->plane_x *speed;
 		if (game->map->map[(int)pl->pl_x][(int)(pl->pl_y - ray->plane_y *speed)] == '0')
-			pl->pl_y -= ray->plane_y *speed;
+			pl->pl_y -= ray->plane_y * speed;
 	}
 }
 
@@ -90,7 +90,7 @@ void	handle_keys(t_game *game)
 	float		speed;
 
 	keys = game->keys;
-	speed = 1;
+	speed = 0.25;
 	if (keys->w != keys->s)
 	{
 		if (keys->w == 1)
@@ -108,9 +108,9 @@ void	handle_keys(t_game *game)
 	if (keys->right != keys->left)
 	{
 		if (keys->right == 1)
-			camera_movement(RIGHT_KEY, game, 0.1);
+			camera_movement(RIGHT_KEY, game, speed/2);
 		else if (keys->left == 1)
-			camera_movement(LEFT_KEY, game, 0.1);
+			camera_movement(LEFT_KEY, game, speed/2);
 	}
 }
 

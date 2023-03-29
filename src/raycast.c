@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 09:15:23 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/29 12:00:53 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/29 17:24:53 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,36 +16,35 @@ void	ver_line(int x, t_game *game)
 {
 	t_raycast	*ray;
 	int			color;
-	int 		ceiling;
-	int	ceiling_color;
+	int i = -1;
 
 	ray = game->ray;
 
-	ceiling = ray->draw_start;
-	ceiling_color = ray->draw_end;
-	while (--ceiling >= 0)
-	{
-		mlx_pixel_put(game->mlx, game->mlx_win, \
-				x, ceiling, ceiling_color++);
-	}
 	if (game->map->map[ray->map_x][ray->map_y] == '1')
 		color = 0x40E0D0;
 	if (game->map->map[ray->map_x][ray->map_y] == '2')
 		color = 0xFF5555;
-	while (ray->draw_start < ray->draw_end)
+	if (ray->side == 1)
+		color = color / 2;
+	while (ray->draw_start <= 0 && ray->draw_end >= game->height && ++i <= game->height)
+		mlx_pixel_put(game->mlx, game->mlx_win, \
+				x, i, color);
+	while (++i <= game->height)
 	{
-		if (ray->side == 1)
+		if (i < ray->draw_start)
 			mlx_pixel_put(game->mlx, game->mlx_win, \
-				x, ray->draw_start, color / 2);
+				x, i, 0x108ED2);
+		else if (i >= ray->draw_start && i <= ray->draw_end)
+		{
+			ray->tex_y = (int)ray->tex_pos & (64 - 1);
+			ray->tex_pos += ray->step;
+			mlx_pixel_put(game->mlx, game->mlx_win, \
+				x, i, game->map->n_texture[ray->tex_x][ray->tex_y]);
+		}
 		else
 			mlx_pixel_put(game->mlx, game->mlx_win, \
-				x, ray->draw_start, color);
-		ray->draw_start++;
+				x, i, 0xffe3ab);
 	}
-	ray->draw_end--;
-	while (++ray->draw_end <= 480)
-		mlx_pixel_put(game->mlx, game->mlx_win, \
-				x, ray->draw_end, 0xffe3ab);
 }
 
 void	raycasting(t_game *game)
@@ -127,7 +126,35 @@ void	raycasting(t_game *game)
 		ray->draw_end = ray->line_height / 2 + game->height / 2;
 		if (ray->draw_end >= game->height)
 			ray->draw_end = game->height - 1;
-  
+
+		if (ray->side == 0)
+		{
+			if (ray->raydir_x < 0)
+				ray->tex_id = 0;
+			else
+				ray->tex_id = 1;
+		}
+		else
+		{
+			if (ray->raydir_y < 0)
+				ray->tex_id = 2;
+			else
+				ray->tex_id = 3;
+		}
+
+		if (ray->side == 0)
+			ray->wall_x = pl->pl_y + ray->camera_wall * ray->raydir_y;
+		else
+			ray->wall_x = pl->pl_x + ray->camera_wall * ray->raydir_x;
+		ray->wall_x -= floor(ray->wall_x);
+
+		ray->tex_x = (int)(ray->wall_x * 64);
+		if ((ray->side == 0 && ray->raydir_x > 0) || (ray->side == 1 && ray->raydir_y < 0))
+			ray->tex_x = 64 - ray->tex_x - 1;
+
+		ray->step = 64 / (double)ray->line_height;
+		ray->tex_pos = (ray->draw_start - game->height / 2 + ray->line_height / 2) * ray->step;
+
 		ver_line(x, game);
 	}
 }

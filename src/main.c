@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/29 12:24:50 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/03/29 15:35:34 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	cub3d(char *path, t_map *map, t_game *game)
 	game->pl->pl_y = 0;
 	game->pl->pldir_x = 0;
 	game->pl->pldir_y = 0;
+	game->ray->raydir_x = 0;
+	game->ray->raydir_y = 0;
 	game->frame = 0;
 	game->old_frame = 0;
 	game->map = map;
@@ -47,6 +49,7 @@ int	cub3d(char *path, t_map *map, t_game *game)
 	game->pl->old_pldir_x = 0;
 	game->ray->old_plane_x = 0;
 	game->ray->camera_wall = 0;
+	game->ray->camera_x = 0;
 	game->ray->step_x = 0;
 	game->ray->step_y = 0;
 	game->ray->side_x = 0;
