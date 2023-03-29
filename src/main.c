@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/28 14:05:17 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/29 10:59:02 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	cub3d(char *path, t_map *map, t_game *game)
 	//permite fechar a janela ao apertar no X, enviando para uma função de exiting game
 	mlx_hook(game->mlx_win, 17, 0, close_game, game);
 
-	mlx_loop_hook(game->mlx, game_loop, game);
+	mlx_loop_hook(game->mlx, &game_loop, game);
 
 	mlx_loop(game->mlx);
 	return (1);
