@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/28 13:01:41 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/03/29 10:32:58 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ enum e_keycode
     S_KEY = 115,
     A_KEY = 97,
     D_KEY = 100,
-	LEFT_KEY = 106;
-	RIGHT_KEY = 107
+	LEFT_KEY = 106,
+	RIGHT_KEY = 107,
     ESC = 65307
 };
 # else
