@@ -23,4 +23,4 @@ Follow the instructions from this repository https://github.com/codam-coding-col
 
 ##
 
-This Minishell project was developed by [Fabrício Esper](https://github.com/fesper-s) and [Gustavo Soares](https://github.com/Guga-melo).
+This cub3d project was developed by [Fabrício Esper](https://github.com/fesper-s) and [Gustavo Soares](https://github.com/Guga-melo).
