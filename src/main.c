@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/03 16:41:42 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/03 16:43:33 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	cub3d(char *path, t_map *map, t_game *game)
 	get_texture(map);
 
 	//inicialização de váriaveis
-	game->pl->pldir_x = 0.000001;
-	game->pl->pldir_y = 0.00001;
+	game->pl->pldir_x = 0;
+	game->pl->pldir_y = 0;
 	game->frame = 0;
 	game->old_frame = 0;
 	game->map = map;
