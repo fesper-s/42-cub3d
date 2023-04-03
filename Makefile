@@ -3,18 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+         #
+#    By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 08:12:43 by fesper-s          #+#    #+#              #
-#    Updated: 2023/03/29 11:44:55 by gussoare         ###   ########.fr        #
+#    Updated: 2023/04/03 13:27:11 by fesper-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= cub3d
 
-SRCS	= ./src/main.c ./src/textures.c ./src/map.c  ./src/check.c \
-		  ./src/init.c ./src/raycast.c ./src/utils.c ./src/ft_atoi_base.c \
-		  ./src/error.c ./src/memory.c ./src/movement.c ./src/texture_direction.c
+SRCS	= ./src/main.c ./src/textures.c ./src/map.c  ./src/check.c ./src/init.c ./src/raycast.c ./src/utils.c ./src/ft_atoi_base.c ./src/error.c ./src/memory.c ./src/movement.c ./src/texture_direction.c ./src/texture_utils.c
 
 OBJS	= $(SRCS:.c=.o)
 

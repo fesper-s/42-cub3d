@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:44:15 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/03 11:45:08 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/03 14:15:22 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@ void	get_north_texture(t_map *map)
 		exit_error("invalid texture file");
 	hex_color = get_hex_color(fd);
 	close(fd);
-
 	fd = open(map->north, O_RDONLY);
 	texture_line = get_texture_line(fd);
 	close(fd);
-
 	map->n_texture = convert_texture(texture_line, hex_color);
 	free_charpp(hex_color);
 	free_charpp(texture_line);
@@ -44,11 +42,9 @@ void	get_south_texture(t_map *map)
 		exit_error("invalid texture file");
 	hex_color = get_hex_color(fd);
 	close(fd);
-
 	fd = open(map->south, O_RDONLY);
 	texture_line = get_texture_line(fd);
 	close(fd);
-
 	map->s_texture = convert_texture(texture_line, hex_color);
 	free_charpp(hex_color);
 	free_charpp(texture_line);
@@ -98,4 +94,6 @@ void	get_texture(t_map *map)
 	get_south_texture(map);
 	get_east_texture(map);
 	get_west_texture(map);
+	map->f_color = rgb_to_hex(map->floor);
+	map->c_color = rgb_to_hex(map->ceiling);
 }
