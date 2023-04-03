@@ -3,32 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 09:15:23 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/03 14:22:36 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/03 16:40:35 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ver_line(int x, t_game *game)
+void	ver_line(int x, t_game *game, int **tex)
 {
 	t_raycast	*ray;
-	int			color;
 	int i = -1;
 
 	ray = game->ray;
-
-	if (game->map->map[ray->map_x][ray->map_y] == '1')
-		color = 0x40E0D0;
-	if (game->map->map[ray->map_x][ray->map_y] == '2')
-		color = 0xFF5555;
-	if (ray->side == 1)
-		color = color / 2;
-	while (ray->draw_start <= 0 && ray->draw_end >= game->height && ++i <= game->height)
-		mlx_pixel_put(game->mlx, game->mlx_win, \
-				x, i, color);
 	while (++i <= game->height)
 	{
 		if (i < ray->draw_start)
@@ -39,7 +28,7 @@ void	ver_line(int x, t_game *game)
 			ray->tex_y = (int)ray->tex_pos & (64 - 1);
 			ray->tex_pos += ray->step;
 			mlx_pixel_put(game->mlx, game->mlx_win, \
-				x, i, game->map->n_texture[ray->tex_y][ray->tex_x]);
+				x, i, tex[ray->tex_y][ray->tex_x]);
 		}
 		else
 			mlx_pixel_put(game->mlx, game->mlx_win, \
@@ -63,11 +52,17 @@ void	raycasting(t_game *game)
 		ray->raydir_x = pl->pldir_x + ray->plane_x * ray->camera_x;
 		ray->raydir_y = pl->pldir_y + ray->plane_y * ray->camera_x;
 		if (ray->raydir_x == 0)
+		{
+			printf("oh no\n");
 			ray->raydir_x = 1e30;
+		}
 		else
 			ray->delta_x = sqrt(1 + pow(ray->raydir_y, 2) / pow(ray->raydir_x, 2));
 		if (ray->raydir_y == 0)
+		{
+			printf("oh no\n");
 			ray->raydir_y = 1e30;
+		}
 		else
 			ray->delta_y = sqrt(1 + pow(ray->raydir_x, 2) / pow(ray->raydir_y, 2));
 
@@ -154,7 +149,15 @@ void	raycasting(t_game *game)
 
 		ray->step = 64 / (double)ray->line_height;
 		ray->tex_pos = (ray->draw_start - game->height / 2 + ray->line_height / 2) * ray->step;
+		if (ray->tex_id == 0)
+			ver_line(x, game, game->map->n_texture);
+		else if (ray->tex_id == 1)
+			ver_line(x, game, game->map->s_texture);
+		else if (ray->tex_id == 2)
+			ver_line(x, game, game->map->e_texture);
+		else
+			ver_line(x, game, game->map->w_texture);
 
-		ver_line(x, game);
+
 	}
 }
