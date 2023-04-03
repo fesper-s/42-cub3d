@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/29 17:20:01 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/03 14:19:07 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ typedef struct s_map
 	int		**w_texture;
 	char	*floor;
 	char	*ceiling;
+	int		f_color;
+	int		c_color;
 }	t_map;
 
 typedef struct s_game
@@ -156,6 +158,9 @@ void	get_east_texture(t_map *map);
 void	get_west_texture(t_map *map);
 void	get_texture(t_map *map);
 
+// texture_utils.c
+int		rgb_to_hex(char *rgb);
+
 //raycast.c
 void	raycasting(t_game *game);
 
@@ -176,7 +181,7 @@ void	replace_char(char *str, char old, char new);
 void	free_map(t_map *map);
 int		char_in_str(char *str, char c);
 
-//
+// ft_atoi_base.c
 int		ft_atoi_base(const char *str, int str_base);
 
 // error.c

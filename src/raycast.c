@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 09:15:23 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/03 11:24:40 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/03 14:22:36 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ver_line(int x, t_game *game)
 	{
 		if (i < ray->draw_start)
 			mlx_pixel_put(game->mlx, game->mlx_win, \
-				x, i, 0x108ED2);
+				x, i, game->map->c_color);
 		else if (i >= ray->draw_start && i <= ray->draw_end)
 		{
 			ray->tex_y = (int)ray->tex_pos & (64 - 1);
@@ -43,7 +43,7 @@ void	ver_line(int x, t_game *game)
 		}
 		else
 			mlx_pixel_put(game->mlx, game->mlx_win, \
-				x, i, 0xffe3ab);
+				x, i, game->map->f_color);
 	}
 }
 
