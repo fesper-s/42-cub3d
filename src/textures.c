@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:42:08 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/29 11:42:17 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/03 10:32:33 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ char	**get_hex_color(int fd)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (!ft_strncmp(line, "\"  c #000000\",", 14))
+		if (!ft_strncmp(line, "/* columns rows colors chars-per-pixel */", 41))
 		{
+			line = get_next_line(fd);
+			line = get_next_line(fd);
 			while (ft_strncmp(line, "/* pixels */", 12))
 			{
 				line = check_line(line);
