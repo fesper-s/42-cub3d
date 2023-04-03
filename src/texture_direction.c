@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:44:15 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/03 14:15:22 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:07:39 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	get_north_texture(t_map *map)
 	fd = open(map->north, O_RDONLY);
 	texture_line = get_texture_line(fd);
 	close(fd);
-	map->n_texture = convert_texture(texture_line, hex_color);
+	map->n_texture = convert_texture(texture_line, hex_color, -1, 0);
 	free_charpp(hex_color);
 	free_charpp(texture_line);
 }
@@ -45,7 +45,7 @@ void	get_south_texture(t_map *map)
 	fd = open(map->south, O_RDONLY);
 	texture_line = get_texture_line(fd);
 	close(fd);
-	map->s_texture = convert_texture(texture_line, hex_color);
+	map->s_texture = convert_texture(texture_line, hex_color, -1, 0);
 	free_charpp(hex_color);
 	free_charpp(texture_line);
 }
@@ -64,7 +64,7 @@ void	get_east_texture(t_map *map)
 	fd = open(map->east, O_RDONLY);
 	texture_line = get_texture_line(fd);
 	close(fd);
-	map->e_texture = convert_texture(texture_line, hex_color);
+	map->e_texture = convert_texture(texture_line, hex_color, -1, 0);
 	free_charpp(hex_color);
 	free_charpp(texture_line);
 }
@@ -83,7 +83,7 @@ void	get_west_texture(t_map *map)
 	fd = open(map->west, O_RDONLY);
 	texture_line = get_texture_line(fd);
 	close(fd);
-	map->w_texture = convert_texture(texture_line, hex_color);
+	map->w_texture = convert_texture(texture_line, hex_color, -1, 0);
 	free_charpp(hex_color);
 	free_charpp(texture_line);
 }

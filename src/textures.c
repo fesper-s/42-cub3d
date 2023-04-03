@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:42:08 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/03 11:22:38 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:03:32 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,22 @@ char	*check_texture_line(char *line)
 	return (new_line);
 }
 
+void	joining_lines(char **line, char **buffer, int fd)
+{
+	char	*aux;
+
+	*line = check_texture_line(*line);
+	aux = ft_strjoin(*buffer, *line);
+	free(*buffer);
+	*buffer = ft_strdup(aux);
+	free(aux);
+	free(*line);
+	*line = get_next_line(fd);
+}
+
 char	**get_texture_line(int fd)
 {
 	char	*line;
-	char	*aux;
 	char	*buffer;
 	char	**texture_line;
 
@@ -109,15 +121,7 @@ char	**get_texture_line(int fd)
 			free(line);
 			line = get_next_line(fd);
 			while (ft_strncmp(line, "};", 2))
-			{
-				line = check_texture_line(line);
-				aux = ft_strjoin(buffer, line);
-				free(buffer);
-				buffer = ft_strdup(aux);
-				free(aux);
-				free(line);
-				line = get_next_line(fd);
-			}
+				joining_lines(&line, &buffer, fd);
 			break ;
 		}
 		free(line);
@@ -127,38 +131,4 @@ char	**get_texture_line(int fd)
 	texture_line = ft_split(buffer, '\n');
 	free(buffer);
 	return (texture_line);
-}
-
-int	**convert_texture(char **texture_line, char **hex_color)
-{
-	int		**texture;
-	char	*texture_char;
-	char	**buffer;
-	int		i;
-	int		j;
-
-	i = -1;
-	texture = malloc(sizeof(int *) * 64);
-	buffer = hex_color;
-	while (*texture_line)
-	{
-		texture[++i] = malloc(sizeof(int) * 64);
-		texture_char = *texture_line;
-		j = -1;
-		while (*texture_char)
-		{
-			if (j < 63)
-				j++;
-			hex_color = buffer;
-			while (*hex_color)
-			{
-				if (*texture_char == *hex_color[0])
-					texture[i][j] = ft_atoi_base(&(*hex_color)[1], 16);
-				hex_color++;
-			}
-			texture_char++;
-		}
-		texture_line++;
-	}
-	return (texture);
 }
