@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 09:15:23 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/29 17:24:53 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/03 11:24:40 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ver_line(int x, t_game *game)
 			ray->tex_y = (int)ray->tex_pos & (64 - 1);
 			ray->tex_pos += ray->step;
 			mlx_pixel_put(game->mlx, game->mlx_win, \
-				x, i, game->map->n_texture[ray->tex_x][ray->tex_y]);
+				x, i, game->map->n_texture[ray->tex_y][ray->tex_x]);
 		}
 		else
 			mlx_pixel_put(game->mlx, game->mlx_win, \
