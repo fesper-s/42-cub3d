@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/03 14:19:07 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:07:33 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ char	*check_line(char *line);
 char	**get_hex_color(int fd);
 char	*check_texture_line(char *line);
 char	**get_texture_line(int fd);
-int		**convert_texture(char **texture_line, char **hex_color);
+int		**convert_texture(char **texture_line, char **hex_color, int i, int j);
 
 // texture_direction.c
 void	get_north_texture(t_map *map);
