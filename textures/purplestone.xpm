@@ -3,7 +3,7 @@ static char *a72beb393d354d1cdcbeb700f54d28abrgtGM4R98mKFgRlf[] = {
 /* columns rows colors chars-per-pixel */
 "64 64 20 1 ",
 "  c #382C14",
-". c gray22",
+". c #383838",
 "X c #403018",
 "o c #483818",
 "O c #543C1C",
@@ -16,7 +16,7 @@ static char *a72beb393d354d1cdcbeb700f54d28abrgtGM4R98mKFgRlf[] = {
 "* c #580058",
 "= c #6C0070",
 "- c #484848",
-"; c gray33",
+"; c #545454",
 ": c #646464",
 "> c #80502C",
 ", c #840084",
