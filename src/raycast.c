@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 09:15:23 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/04 08:00:37 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/04 08:36:21 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ver_line(int x, t_game *game)
+void	ver_line(int x, t_game *game, int **tex)
 {
 	t_raycast	*ray;
 	int			i;
@@ -29,7 +29,7 @@ void	ver_line(int x, t_game *game)
 			ray->tex_y = (int)ray->tex_pos & (64 - 1);
 			ray->tex_pos += ray->step;
 			mlx_pixel_put(game->mlx, game->mlx_win, \
-				x, i, game->map->n_texture[ray->tex_y][ray->tex_x]);
+				x, i, tex[ray->tex_y][ray->tex_x]);
 		}
 		else
 			mlx_pixel_put(game->mlx, game->mlx_win, \
@@ -144,7 +144,15 @@ void	raycasting(t_game *game)
 
 		ray->step = 64 / (double)ray->line_height;
 		ray->tex_pos = (ray->draw_start - game->height / 2 + ray->line_height / 2) * ray->step;
+		if (ray->tex_id == 0)
+			ver_line(x, game, game->map->n_texture);
+		else if (ray->tex_id == 1)
+			ver_line(x, game, game->map->s_texture);
+		else if (ray->tex_id == 2)
+			ver_line(x, game, game->map->e_texture);
+		else
+			ver_line(x, game, game->map->w_texture);
 
-		ver_line(x, game);
+
 	}
 }

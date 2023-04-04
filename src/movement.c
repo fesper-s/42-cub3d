@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:34:37 by gussoare          #+#    #+#             */
-/*   Updated: 2023/03/29 16:29:15 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/04 08:34:45 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	camera_movement(int key, t_game *game, double speed)
 
 	pl = game->pl;
 	ray = game->ray;
-	if (key == RIGHT_KEY)
+	if (key == LEFT_KEY)
 	{
 		pl->old_pldir_x = pl->pldir_x;
       	pl->pldir_x = pl->pldir_x * cos(speed) - pl->pldir_y * sin(speed);
@@ -72,7 +72,7 @@ void	camera_movement(int key, t_game *game, double speed)
       	ray->plane_x = ray->plane_x * cos(speed)- ray->plane_y * sin(speed);
      	ray->plane_y = ray->old_plane_x * sin(speed) + ray->plane_y * cos(speed);
 	}
-	else if (key == LEFT_KEY)
+	else if (key == RIGHT_KEY)
 	{
 		pl->old_pldir_x = pl->pldir_x;
       	pl->pldir_x = pl->pldir_x * cos(-speed) - pl->pldir_y * sin(-speed);
@@ -108,9 +108,9 @@ void	handle_keys(t_game *game)
 	if (keys->right != keys->left)
 	{
 		if (keys->right == 1)
-			camera_movement(RIGHT_KEY, game, speed/2);
+			camera_movement(RIGHT_KEY, game, 0.1);
 		else if (keys->left == 1)
-			camera_movement(LEFT_KEY, game, speed/2);
+			camera_movement(LEFT_KEY, game, 0.1);
 	}
 }
 
