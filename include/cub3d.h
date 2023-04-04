@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/04 11:14:46 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/04 13:15:06 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,25 @@
 
 enum e_keycode
 {
-    W_KEY = 119,
-    S_KEY = 115,
-    A_KEY = 97,
-    D_KEY = 100,
+	W_KEY = 119,
+	S_KEY = 115,
+	A_KEY = 97,
+	D_KEY = 100,
 	LEFT_KEY = 65361,
 	RIGHT_KEY = 65363,
-    ESC = 65307
+	ESC = 65307
 };
 # else
 
 enum e_keycode
 {
-    W_KEY = 13,
-    S_KEY = 1,
-    A_KEY = 0,
-    D_KEY = 2,
+	W_KEY = 13,
+	S_KEY = 1,
+	A_KEY = 0,
+	D_KEY = 2,
 	LEFT_KEY = 123,
 	RIGHT_KEY = 124,
-    ESC = 53
+	ESC = 53
 };
 # endif
 
@@ -99,7 +99,7 @@ typedef struct s_raycast
 	int		tex_id;
 	int		tex_x;
 	int		tex_y;
-	double 	step;
+	double	step;
 	double	tex_pos;
 	double	wall_x;
 }	t_raycast;
