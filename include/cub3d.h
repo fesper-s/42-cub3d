@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/04 11:14:46 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/04 13:01:49 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,9 +143,11 @@ int		check_map(char *path, t_map *map);
 int		check_sprites(t_map *map);
 
 //init.c
-
 void	pl_pos(t_game *game, t_map *map);
-void	init_var(t_game *game);
+
+//raycast.c
+void	init_raycast(t_game *game, int x);
+void	raycasting(t_game *game);
 
 // textures.c
 char	*check_line(char *line);
@@ -171,10 +173,6 @@ void	raycasting(t_game *game);
 void	vertical_movement(t_game *game, double speed);
 void	horizontal_movement(t_game *game, double speed);
 void	camera_movement(t_game *game, double speed);
-void	handle_keys(t_game *game);
-
-//create a event.c file and put these in
-int		key_event(int key, t_game *game);
 int		key_press(int key, t_game *game);
 int		key_release(int key, t_game *game);
 

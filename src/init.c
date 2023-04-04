@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:32:20 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/04 08:31:01 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/04 13:13:18 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,25 @@ void	pl_pos(t_game *game, t_map *map)
 	}
 }
 
-void	init_var(t_game *game)
+void	init_raycast(t_game *game, int x)
 {
-	game->ray->map_x = (int)game->pl->pl_x;
-	game->ray->map_y = (int)game->pl->pl_y;
-	game->ray->hit = 0;
+	t_raycast	*ray;
+	t_player	*pl;
+
+	ray = game->ray;
+	pl = game->pl;
+	ray->camera_x = 2 * x / (double)(game->width) - 1;
+	ray->raydir_x = pl->pldir_x + ray->plane_x * ray->camera_x;
+	ray->raydir_y = pl->pldir_y + ray->plane_y * ray->camera_x;
+	if (ray->raydir_x == 0)
+		ray->raydir_x = 1e30;
+	else
+		ray->delta_x = sqrt(1 + pow(ray->raydir_y, 2) / pow(ray->raydir_x, 2));
+	if (ray->raydir_y == 0)
+		ray->raydir_y = 1e30;
+	else
+		ray->delta_y = sqrt(1 + pow(ray->raydir_x, 2) / pow(ray->raydir_y, 2));
+	ray->map_x = (int)game->pl->pl_x;
+	ray->map_y = (int)game->pl->pl_y;
+	ray->hit = 0;
 }
