@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/04 13:01:49 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/04 14:21:03 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ typedef struct s_game
 	struct s_keys		*keys;
 }	t_game;
 
+//main.c
+
 // map.c
 int		read_map(char *path, t_map *map);
 int		check_map(char *path, t_map *map);
@@ -146,8 +148,11 @@ int		check_sprites(t_map *map);
 void	pl_pos(t_game *game, t_map *map);
 
 //raycast.c
-void	init_raycast(t_game *game, int x);
 void	raycasting(t_game *game);
+void	init_raycast(t_game *game, int x);
+void	step_and_side_calc(t_game *game);
+void	dda(t_game *game);
+
 
 // textures.c
 char	*check_line(char *line);
