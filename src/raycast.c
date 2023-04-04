@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 09:15:23 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/03 16:44:10 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/04 08:36:21 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 void	ver_line(int x, t_game *game, int **tex)
 {
 	t_raycast	*ray;
-	int i = -1;
+	int			i;
 
+	i = -1;
 	ray = game->ray;
 	while (++i <= game->height)
 	{
