@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 13:22:18 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/03 15:07:42 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/04 09:06:35 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ int	**convert_texture(char **texture_line, char **hex_color, int i, int j)
 		texture[++i] = malloc(sizeof(int) * 64);
 		texture_char = *texture_line;
 		j = -1;
-		while (*texture_char)
+		while (*texture_char && ++j < 64)
 		{
-			if (j < 63)
-				j++;
 			hex_color = buffer;
 			while (*hex_color)
 			{

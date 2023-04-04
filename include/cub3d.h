@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/03 15:07:33 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/04 11:14:46 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ typedef struct s_player
 	double	pldir_x;
 	double	pldir_y;
 	double	old_pldir_x;
+	int		ver_walk;
+	int		hor_walk;
+	int		turn_dir;
 }	t_player;
 
 typedef struct s_raycast
@@ -165,9 +168,9 @@ int		rgb_to_hex(char *rgb);
 void	raycasting(t_game *game);
 
 //movement.c
-void	vertical_movement(int key, t_game *game, double speed);
-void	horizontal_movement(int key, t_game *game, double speed);
-void	camera_movement(int key, t_game *game, double speed);
+void	vertical_movement(t_game *game, double speed);
+void	horizontal_movement(t_game *game, double speed);
+void	camera_movement(t_game *game, double speed);
 void	handle_keys(t_game *game);
 
 //create a event.c file and put these in
@@ -178,7 +181,6 @@ int		key_release(int key, t_game *game);
 // utils.c
 int		ft_strrncmp(char *s1, char *s2, int len);
 void	replace_char(char *str, char old, char new);
-void	free_map(t_map *map);
 int		char_in_str(char *str, char c);
 
 // ft_atoi_base.c
@@ -190,5 +192,10 @@ void	exit_error(char *msg);
 
 // memory.c
 void	free_charpp(char **ptr);
+void	free_intpp(int **ptr);
+void	free_map(t_map *map);
+
+// free_game.c
+void	free_game(t_game *game);
 
 #endif
