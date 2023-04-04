@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/04 08:28:52 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/04 11:16:02 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int	close_game(t_game *game)
 int	game_loop(t_game *game)
 {
 	raycasting(game);
-	handle_keys(game);
+	vertical_movement(game, 0.25);
+	horizontal_movement(game, 0.25);
+	camera_movement(game, 0.1);
 	return (0);
 }
 
@@ -50,10 +52,9 @@ int	cub3d(char *path, t_map *map, t_game *game)
 	game->ray->step_y = 0;
 	game->ray->side_x = 0;
 	game->ray->side_y = 0;
-	game->keys->w = 0;
-	game->keys->a = 0;
-	game->keys->s = 0;
-	game->keys->d = 0;
+	game->pl->ver_walk = 0;
+	game->pl->hor_walk = 0;
+	game->pl->turn_dir = 0;
 	game->keys->left = 0;
 	game->keys->right = 0;
 
@@ -93,6 +94,6 @@ int	main(int argc, char **argv)
 	game.pl = &pl;
 	game.keys = & key;
 	cub3d(argv[1], &map, &game);
-	free_map(&map);
+	free_game(&game);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:42:08 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/03 15:03:32 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/04 09:39:55 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ char	**get_hex_color(int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
+	free(line);
 	hex_color = ft_split(hex_line, '\n');
 	free(hex_line);
 	return (hex_color);
