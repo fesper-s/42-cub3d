@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 09:15:23 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/03 14:22:36 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/04 08:00:37 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,10 @@
 void	ver_line(int x, t_game *game)
 {
 	t_raycast	*ray;
-	int			color;
-	int i = -1;
+	int			i;
 
+	i = -1;
 	ray = game->ray;
-
-	if (game->map->map[ray->map_x][ray->map_y] == '1')
-		color = 0x40E0D0;
-	if (game->map->map[ray->map_x][ray->map_y] == '2')
-		color = 0xFF5555;
-	if (ray->side == 1)
-		color = color / 2;
-	while (ray->draw_start <= 0 && ray->draw_end >= game->height && ++i <= game->height)
-		mlx_pixel_put(game->mlx, game->mlx_win, \
-				x, i, color);
 	while (++i <= game->height)
 	{
 		if (i < ray->draw_start)
