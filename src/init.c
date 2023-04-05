@@ -6,11 +6,35 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:32:20 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/04 13:13:18 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/05 12:47:50 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	init_var(t_game *game, t_map *map)
+{
+	game->height = 480;
+	game->width = 640;
+	game->pl->pldir_x = 0;
+	game->pl->pldir_y = 0;
+	game->frame = 0;
+	game->old_frame = 0;
+	game->ray->plane_x = 0;
+	game->ray->plane_y = 0;
+	game->pl->old_pldir_x = 0;
+	game->ray->old_plane_x = 0;
+	game->ray->camera_wall = 0;
+	game->ray->camera_x = 0;
+	game->ray->step_x = 0;
+	game->ray->step_y = 0;
+	game->ray->side_x = 0;
+	game->ray->side_y = 0;
+	game->pl->ver_walk = 0;
+	game->pl->hor_walk = 0;
+	game->pl->turn_dir = 0;
+	game->map = map;
+}
 
 void	pl_pos(t_game *game, t_map *map)
 {
@@ -49,7 +73,6 @@ void	pl_pos(t_game *game, t_map *map)
 				}
 				map->map[i][j] = '0';
 			}
-			
 		}
 	}
 }

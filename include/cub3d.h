@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/04 14:21:03 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/05 13:27:26 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,38 +29,36 @@
 
 enum e_keycode
 {
-    W_KEY = 119,
-    S_KEY = 115,
-    A_KEY = 97,
-    D_KEY = 100,
+	W_KEY = 119,
+	S_KEY = 115,
+	A_KEY = 97,
+	D_KEY = 100,
 	LEFT_KEY = 65361,
 	RIGHT_KEY = 65363,
-    ESC = 65307
+	ESC = 65307
 };
 # else
 
 enum e_keycode
 {
-    W_KEY = 13,
-    S_KEY = 1,
-    A_KEY = 0,
-    D_KEY = 2,
+	W_KEY = 13,
+	S_KEY = 1,
+	A_KEY = 0,
+	D_KEY = 2,
 	LEFT_KEY = 123,
 	RIGHT_KEY = 124,
-    ESC = 53
+	ESC = 53
 };
 # endif
 
-typedef struct s_keys
+typedef struct s_image
 {
-	int	w;
-	int	a;
-	int	s;
-	int	d;
-	int	left;
-	int	right;
-}	t_keys;
-
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_image;
 
 typedef struct s_player
 {
@@ -99,7 +97,7 @@ typedef struct s_raycast
 	int		tex_id;
 	int		tex_x;
 	int		tex_y;
-	double 	step;
+	double	step;
 	double	tex_pos;
 	double	wall_x;
 }	t_raycast;
@@ -132,7 +130,7 @@ typedef struct s_game
 	struct s_map		*map;
 	struct s_player		*pl;
 	struct s_raycast	*ray;
-	struct s_keys		*keys;
+	struct s_image		*img;
 }	t_game;
 
 //main.c
@@ -145,14 +143,15 @@ int		check_map(char *path, t_map *map);
 int		check_sprites(t_map *map);
 
 //init.c
+void	init_var(t_game *game, t_map *map);
 void	pl_pos(t_game *game, t_map *map);
+void	init_raycast(t_game *game, int x);
 
 //raycast.c
 void	raycasting(t_game *game);
-void	init_raycast(t_game *game, int x);
 void	step_and_side_calc(t_game *game);
 void	dda(t_game *game);
-
+void	get_line_position(t_game *game);
 
 // textures.c
 char	*check_line(char *line);
@@ -170,9 +169,6 @@ void	get_texture(t_map *map);
 
 // texture_utils.c
 int		rgb_to_hex(char *rgb);
-
-//raycast.c
-void	raycasting(t_game *game);
 
 //movement.c
 void	vertical_movement(t_game *game, double speed);

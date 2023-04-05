@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 09:15:23 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/04 14:21:43 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/05 13:39:06 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ver_line(int x, t_game *game, int **tex)
 
 	i = -1;
 	ray = game->ray;
-	while (++i <= game->height)
+	while (++i < game->height)
 	{
 		if (i < ray->draw_start)
 			mlx_pixel_put(game->mlx, game->mlx_win, \
@@ -66,13 +66,11 @@ void	step_and_side_calc(t_game *game)
 	}
 }
 
-void dda(t_game *game)
+void	dda(t_game *game)
 {
 	t_raycast	*ray;
-	t_player	*pl;
 
 	ray = game->ray;
-	pl = game->pl;
 	while (ray->hit == 0)
 	{
 		//pular para outro quadrado do mapa, para o X ou para o Y
@@ -91,7 +89,28 @@ void dda(t_game *game)
 		//Checar para ver se o raio atingiu 
 		if (game->map->map[ray->map_x][ray->map_y] != '0')
 			ray->hit = 1;
+		//Calculando a distancia projetada na direção da camera
+		if (ray->side == 0) 
+			ray->camera_wall = (ray->side_x - ray->delta_x);
+		else
+			ray->camera_wall = (ray->side_y - ray->delta_y);
 	}
+}
+
+void	get_line_position(t_game *game)
+{
+	t_raycast	*ray;
+
+	ray = game->ray;
+	//Calculate height of line to draw on screen
+	ray->line_height = (int)(game->height / ray->camera_wall);
+	//calculate lowest and highest pixel to fill in current stripe
+	ray->draw_start = (-1 * ray->line_height) / 2 + game->height / 2;
+	if (ray->draw_start < 0)
+		ray->draw_start = 0;
+	ray->draw_end = ray->line_height / 2 + game->height / 2;
+	if (ray->draw_end >= game->height)
+		ray->draw_end = game->height - 1;
 }
 
 void	raycasting(t_game *game)
@@ -108,24 +127,7 @@ void	raycasting(t_game *game)
 		init_raycast(game, x);
 		step_and_side_calc(game);
 		dda(game);
-
-
-		//iniciando DDA
-		
-		//Calculando a distancia projetada na direção da camera
-		if (ray->side == 0) 
-			ray->camera_wall = (ray->side_x - ray->delta_x);
-		else
-			ray->camera_wall = (ray->side_y - ray->delta_y);
-		//Calculate height of line to draw on screen
-		ray->line_height = (int)(game->height / ray->camera_wall);
-		//calculate lowest and highest pixel to fill in current stripe
-		ray->draw_start = (-1 * ray->line_height) / 2 + game->height / 2;
-		if (ray->draw_start < 0)
-			ray->draw_start = 0;
-		ray->draw_end = ray->line_height / 2 + game->height / 2;
-		if (ray->draw_end >= game->height)
-			ray->draw_end = game->height - 1;
+		get_line_position(game);
 
 		if (ray->side == 0)
 		{
