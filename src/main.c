@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/05 14:10:42 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/05 15:26:11 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,23 @@ int	close_game(t_game *game)
 
 int	game_loop(t_game *game)
 {	
+
+	float speed;
+
+	speed = 0.05;
+	printf("old_pldir-->%f\n", game->pl->old_pldir_x);
+	printf("pldir_x-->%f\n", game->pl->pldir_x);
+	printf("pldir_y-->%f\n", game->pl->pldir_y);
+	printf("old_plane-->%f\n", game->ray->old_plane_x);
+	printf("plane_x-->%f\n", game->ray->plane_x);
+	printf("plane_y-->%f\n", game->ray->plane_y);
 	ft_bzero(game->img->addr, game->height * game->width * \
 		(game->img->bpp / 8));
 	raycasting(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img->img, 0, 0);
-	vertical_movement(game, 0.25);
-	horizontal_movement(game, 0.25);
-	camera_movement(game, 0.1);
+	vertical_movement(game, speed);
+	horizontal_movement(game, speed);
+	camera_movement(game, speed);
 	return (0);
 }
 

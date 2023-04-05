@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 09:15:23 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/05 14:09:55 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/05 15:04:18 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,9 @@ void	dda(t_game *game)
 			ray->hit = 1;
 		//Calculando a distancia projetada na direção da camera
 		if (ray->side == 0) 
-			ray->camera_wall = (ray->side_x - ray->delta_x);
+			ray->camera_wall = fabs((ray->map_x - game->pl->pl_x + (1 - ray->step_x) / 2) / ray->raydir_x);
 		else
-			ray->camera_wall = (ray->side_y - ray->delta_y);
+			ray->camera_wall = fabs((ray->map_y - game->pl->pl_y + (1 - ray->step_y) / 2) / ray->raydir_y);
 	}
 }
 

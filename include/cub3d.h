@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/05 13:27:26 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/05 15:16:18 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,6 @@ typedef struct s_game
 {
 	int					width;
 	int					height;
-	double				frame;
-	double				old_frame;
 	void				*mlx;
 	void				*mlx_win;
 	struct s_map		*map;

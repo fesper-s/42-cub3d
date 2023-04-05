@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:32:20 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/05 12:47:50 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/05 15:28:51 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ void	init_var(t_game *game, t_map *map)
 {
 	game->height = 480;
 	game->width = 640;
-	game->pl->pldir_x = 0;
-	game->pl->pldir_y = 0;
-	game->frame = 0;
-	game->old_frame = 0;
+	game->pl->pldir_x = 0.00000000001;
+	game->pl->pldir_y = 0.00000000001;
 	game->ray->plane_x = 0;
 	game->ray->plane_y = 0;
 	game->pl->old_pldir_x = 0;
@@ -54,22 +52,22 @@ void	pl_pos(t_game *game, t_map *map)
 				if (map->map[i][j] == 'N')
 				{
 					game->pl->pldir_x = -1;
-					game->ray->plane_y = 0.66;
+					game->ray->plane_y = -0.66;
 				}
 				else if (map->map[i][j] == 'S')
 				{
 					game->pl->pldir_x = 1;
-					game->ray->plane_y = -0.66;
+					game->ray->plane_y = 0.66;
 				}
 				else if (map->map[i][j] == 'E')
 				{
 					game->pl->pldir_y = 1;
-					game->ray->plane_x = 0.66;
+					game->ray->plane_x = -0.66;
 				}
 				else if (map->map[i][j] == 'W')
 				{
 					game->pl->pldir_y = -1;
-					game->ray->plane_x = -0.66;
+					game->ray->plane_x = 0.66;
 				}
 				map->map[i][j] = '0';
 			}
@@ -90,11 +88,11 @@ void	init_raycast(t_game *game, int x)
 	if (ray->raydir_x == 0)
 		ray->raydir_x = 1e30;
 	else
-		ray->delta_x = sqrt(1 + pow(ray->raydir_y, 2) / pow(ray->raydir_x, 2));
+		ray->delta_x =  fabs(1 / ray->raydir_x);
 	if (ray->raydir_y == 0)
 		ray->raydir_y = 1e30;
 	else
-		ray->delta_y = sqrt(1 + pow(ray->raydir_x, 2) / pow(ray->raydir_y, 2));
+		ray->delta_y =  fabs(1 / ray->raydir_y);
 	ray->map_x = (int)game->pl->pl_x;
 	ray->map_y = (int)game->pl->pl_y;
 	ray->hit = 0;
