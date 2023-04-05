@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:34:37 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/05 15:07:20 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/05 15:36:20 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int	key_press(int key, t_game *game)
 		game->pl->turn_dir = -1;
 	else if (key == LEFT_KEY)
 		game->pl->turn_dir = 1;
+	else if (key == ESC_KEY)
+		close_game(game);
 	return (0);
 }
 

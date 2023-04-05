@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/05 15:16:18 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/05 15:36:52 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ enum e_keycode
 	D_KEY = 100,
 	LEFT_KEY = 65361,
 	RIGHT_KEY = 65363,
-	ESC = 65307
+	ESC_KEY = 65307
 };
 # else
 
@@ -47,7 +47,7 @@ enum e_keycode
 	D_KEY = 2,
 	LEFT_KEY = 123,
 	RIGHT_KEY = 124,
-	ESC = 53
+	ESC_KEY = 53
 };
 # endif
 
@@ -132,6 +132,7 @@ typedef struct s_game
 }	t_game;
 
 //main.c
+int		close_game(t_game *game);
 
 // map.c
 int		read_map(char *path, t_map *map);
