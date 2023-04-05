@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:42:08 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/04 09:39:55 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/05 10:29:53 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ char	**get_hex_color(int fd)
 	{
 		if (!ft_strncmp(line, "/* columns rows colors chars-per-pixel */", 41))
 		{
+			free(line);
 			line = get_next_line(fd);
+			free(line);
 			line = get_next_line(fd);
 			while (ft_strncmp(line, "/* pixels */", 12))
 			{

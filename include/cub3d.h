@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/04 13:15:06 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/05 10:26:50 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,10 +171,8 @@ void	raycasting(t_game *game);
 void	vertical_movement(t_game *game, double speed);
 void	horizontal_movement(t_game *game, double speed);
 void	camera_movement(t_game *game, double speed);
-void	handle_keys(t_game *game);
 
 //create a event.c file and put these in
-int		key_event(int key, t_game *game);
 int		key_press(int key, t_game *game);
 int		key_release(int key, t_game *game);
 
