@@ -6,11 +6,48 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 09:15:23 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/05 13:39:06 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/05 14:09:55 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	img_pixel_put(t_game *game, int x, int y, int color)
+{
+	t_image	*img;
+	int		pixel;
+
+	img = game->img;
+	if (y >= game->height || x >= game->width || y < 0 || x < 0)
+		return ;
+	pixel = (y * img->line_len) + (x * (img->bpp / 8));
+	if (img->endian == 1)
+	{
+		img->addr[pixel + 0] = (color >> 24);
+		img->addr[pixel + 1] = (color >> 16) & 0xFF;
+		img->addr[pixel + 2] = (color >> 8) & 0xFF;
+		img->addr[pixel + 3] = (color) & 0xFF;
+	}
+	else if (img->endian == 0)
+	{
+		img->addr[pixel + 0] = (color) & 0xFF;
+		img->addr[pixel + 1] = (color >> 8) & 0xFF;
+		img->addr[pixel + 2] = (color >> 16) & 0xFF;
+		img->addr[pixel + 3] = (color >> 24);
+	}
+}
+
+void	img_paste_pixel(t_game *game, int x, int y, int pixel)
+{
+	t_image	*img;
+	char	*dst;
+
+	img = game->img;
+	if (y >= game->height || x >= game->width || y < 0 || x < 0)
+		return ;
+	dst = img->addr + (y * img->line_len) + (x * (img->bpp / 8));
+	*(unsigned int *)dst = pixel;
+}
 
 void	ver_line(int x, t_game *game, int **tex)
 {
@@ -22,18 +59,18 @@ void	ver_line(int x, t_game *game, int **tex)
 	while (++i < game->height)
 	{
 		if (i < ray->draw_start)
-			mlx_pixel_put(game->mlx, game->mlx_win, \
-				x, i, game->map->c_color);
+			img_pixel_put(game, game->width - x - 1, \
+				i, game->map->c_color);
 		else if (i >= ray->draw_start && i <= ray->draw_end)
 		{
 			ray->tex_y = (int)ray->tex_pos & (64 - 1);
 			ray->tex_pos += ray->step;
-			mlx_pixel_put(game->mlx, game->mlx_win, \
-				x, i, tex[ray->tex_y][ray->tex_x]);
+			img_paste_pixel(game, game->width - 1 - x, \
+				i, tex[ray->tex_y][ray->tex_x]);
 		}
 		else
-			mlx_pixel_put(game->mlx, game->mlx_win, \
-				x, i, game->map->f_color);
+			img_pixel_put(game, game->width - x - 1, \
+				i, game->map->f_color);
 	}
 }
 

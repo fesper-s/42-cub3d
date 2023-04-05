@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/05 13:38:40 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/05 14:10:42 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	game_loop(t_game *game)
 	ft_bzero(game->img->addr, game->height * game->width * \
 		(game->img->bpp / 8));
 	raycasting(game);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img->img, 0, 0);
 	vertical_movement(game, 0.25);
 	horizontal_movement(game, 0.25);
 	camera_movement(game, 0.1);
