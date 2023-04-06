@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/05 10:26:50 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/05 22:20:36 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ enum e_keycode
 	D_KEY = 100,
 	LEFT_KEY = 65361,
 	RIGHT_KEY = 65363,
-	ESC = 65307
+	ESC_KEY = 65307
 };
 # else
 
@@ -47,20 +47,18 @@ enum e_keycode
 	D_KEY = 2,
 	LEFT_KEY = 123,
 	RIGHT_KEY = 124,
-	ESC = 53
+	ESC_KEY = 53
 };
 # endif
 
-typedef struct s_keys
+typedef struct s_image
 {
-	int	w;
-	int	a;
-	int	s;
-	int	d;
-	int	left;
-	int	right;
-}	t_keys;
-
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_image;
 
 typedef struct s_player
 {
@@ -125,15 +123,16 @@ typedef struct s_game
 {
 	int					width;
 	int					height;
-	double				frame;
-	double				old_frame;
 	void				*mlx;
 	void				*mlx_win;
 	struct s_map		*map;
 	struct s_player		*pl;
 	struct s_raycast	*ray;
-	struct s_keys		*keys;
+	struct s_image		*img;
 }	t_game;
+
+//main.c
+int		close_game(t_game *game);
 
 // map.c
 int		read_map(char *path, t_map *map);
@@ -143,9 +142,15 @@ int		check_map(char *path, t_map *map);
 int		check_sprites(t_map *map);
 
 //init.c
-
+void	init_var(t_game *game, t_map *map);
 void	pl_pos(t_game *game, t_map *map);
-void	init_var(t_game *game);
+void	init_raycast(t_game *game, int x);
+
+//raycast.c
+void	raycasting(t_game *game);
+void	step_and_side_calc(t_game *game);
+void	dda(t_game *game);
+void	get_line_position(t_game *game);
 
 // textures.c
 char	*check_line(char *line);
@@ -164,15 +169,10 @@ void	get_texture(t_map *map);
 // texture_utils.c
 int		rgb_to_hex(char *rgb);
 
-//raycast.c
-void	raycasting(t_game *game);
-
 //movement.c
 void	vertical_movement(t_game *game, double speed);
 void	horizontal_movement(t_game *game, double speed);
 void	camera_movement(t_game *game, double speed);
-
-//create a event.c file and put these in
 int		key_press(int key, t_game *game);
 int		key_release(int key, t_game *game);
 
