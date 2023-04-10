@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/10 11:09:22 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:47:46 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	close_game(t_game *game)
 {
 	mlx_destroy_window(game->mlx, game->mlx_win);
-	//free_game(game);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
