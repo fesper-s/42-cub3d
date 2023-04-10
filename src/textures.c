@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:42:08 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/10 10:36:54 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:20:59 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	*check_line(char *line)
 		new_line[++j] = line[i];
 	}
 	new_line[j + 1] = 0;
-	free(line);
 	return (new_line);
 }
 
