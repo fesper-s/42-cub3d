@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:47 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/10 11:10:09 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/10 13:18:55 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	maplen(char *path)
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		return (print_error("File doesn't exist"));
+		exit_error("File doesn't exist");
 	len = 0;
 	aux = get_next_line(fd);
 	while (aux)
@@ -67,7 +67,7 @@ int	assign_map(t_map *map, char *path, int map_len)
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		return (print_error("File doesn't exist"));
+		exit_error("File doesn't exist");
 	i = -1;
 	j = 0;
 	while (++i < map_len)
@@ -96,7 +96,8 @@ int	read_map(char *path, t_map *map)
 int	check_map(char *path, t_map *map)
 {
 	if (ft_strrncmp(path, ".cub", 5))
-		return (print_error("Invalid type of file"));
+		exit_error("Invalid type of file");
+	init_map(map);
 	read_map(path, map);
 	return (0);
 }

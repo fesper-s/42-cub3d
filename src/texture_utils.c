@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 13:22:18 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/10 10:37:26 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/10 13:19:37 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,30 @@ void	getting_hex_colors(char **line, char **hex_line, int fd)
 	free(aux);
 	free(*line);
 	*line = get_next_line(fd);
+}
+
+void	check_floor_and_ceiling(char *floor, char *ceiling)
+{
+	char	**buffer;
+	int		i;
+
+	buffer = ft_split(floor, ',');
+	i = -1;
+	while (buffer[++i])
+	{
+		if (ft_atoi(buffer[i]) < 0 || ft_atoi(buffer[i]) > 255)
+			exit_error("Invalid floor value");
+	}
+	if (i != 3)
+		exit_error("Invalid floor value");
+	buffer = ft_split(ceiling, ',');
+	i = -1;
+	while (buffer[++i])
+	{
+		if (ft_atoi(buffer[i]) < 0 || ft_atoi(buffer[i]) > 255)
+			exit_error("Invalid ceiling value");
+	}
+	if (i != 3)
+		exit_error("Invalid ceiling value");
+	free_charpp(buffer);
 }
