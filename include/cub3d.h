@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/10 12:26:19 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/10 13:19:47 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ void	init_var(t_game *game, t_map *map);
 void	pl_pos(t_game *game, t_map *map);
 void	set_player_pov(t_game *game, int i, int j);
 void	init_raycast(t_game *game, int x);
+void	init_map(t_map *map);
 
 //raycast.c
 void	raycasting(t_game *game);
@@ -184,6 +185,7 @@ void	get_texture(t_map *map);
 int		**convert_texture(char **texture_line, char **hex_color, int i, int j);
 int		rgb_to_hex(char *rgb);
 void	getting_hex_colors(char **line, char **hex_line, int fd);
+void	check_floor_and_ceiling(char *floor, char *ceiling);
 
 //movement.c
 void	vertical_movement(t_game *game, double speed);

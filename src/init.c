@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:32:20 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/10 12:31:01 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/10 13:01:15 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,14 @@ void	init_raycast(t_game *game, int x)
 	ray->map_x = (int)game->pl->pl_x;
 	ray->map_y = (int)game->pl->pl_y;
 	ray->hit = 0;
+}
+
+void	init_map(t_map *map)
+{
+	map->north = NULL;
+	map->south = NULL;
+	map->east = NULL;
+	map->west = NULL;
+	map->floor = NULL;
+	map->ceiling = NULL;
 }
