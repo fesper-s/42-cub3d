@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/05 22:20:36 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/10 10:37:59 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ void	get_texture(t_map *map);
 
 // texture_utils.c
 int		rgb_to_hex(char *rgb);
+void	getting_hex_colors(char **line, char **hex_line, int fd);
 
 //movement.c
 void	vertical_movement(t_game *game, double speed);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:47 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/20 14:25:33 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:01:46 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,36 @@ int	maplen(char *path)
 	return (len);
 }
 
-int assign_map(t_map *map, char *path, int map_len)
+void	get_map_info(int fd, t_map *map, int *j)
+{
+	char	*aux;
+	char	*buffer;
+
+	aux = get_next_line(fd);
+	buffer = ft_strtrim(aux, "\n");
+	if (!ft_strncmp(buffer, "NO ", 3))
+		map->north = ft_strtrim(buffer + 2, " ");
+	else if (!ft_strncmp(buffer, "SO ", 3))
+		map->south = ft_strtrim(buffer + 2, " ");
+	else if (!ft_strncmp(buffer, "EA ", 3))
+		map->east = ft_strtrim(buffer + 2, " ");
+	else if (!ft_strncmp(buffer, "WE ", 3))
+		map->west = ft_strtrim(buffer + 2, " ");
+	else if (!ft_strncmp(buffer, "F ", 2))
+		map->floor = ft_strtrim(buffer + 1, " ");
+	else if (!ft_strncmp(buffer, "C ", 2))
+		map->ceiling = ft_strtrim(buffer + 1, " ");
+	else if (ft_strlen(buffer) && buffer[0])
+		map->map[(*j)++] = ft_strdup(buffer);
+	free(buffer);
+	free(aux);
+}
+
+int	assign_map(t_map *map, char *path, int map_len)
 {
 	int		i;
 	int		j;
 	int		fd;
-	char	*buffer;
-	char	*aux;
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
@@ -48,26 +71,7 @@ int assign_map(t_map *map, char *path, int map_len)
 	i = -1;
 	j = 0;
 	while (++i < map_len)
-	{
-		aux = get_next_line(fd);
-		buffer = ft_strtrim(aux, "\n");
-		if (!ft_strncmp(buffer, "NO ", 3))
-			map->north = ft_strtrim(buffer + 2, " ");
-		else if (!ft_strncmp(buffer, "SO ", 3))
-			map->south = ft_strtrim(buffer + 2, " ");
-		else if (!ft_strncmp(buffer, "EA ", 3))
-			map->east = ft_strtrim(buffer + 2, " ");
-		else if (!ft_strncmp(buffer, "WE ", 3))
-			map->west = ft_strtrim(buffer + 2, " ");
-		else if (!ft_strncmp(buffer, "F ", 2))
-			map->floor = ft_strtrim(buffer + 1, " ");
-		else if (!ft_strncmp(buffer, "C ", 2))
-			map->ceiling = ft_strtrim(buffer + 1, " ");
-		else if (ft_strlen(buffer) && buffer[0])
-			map->map[j++] = ft_strdup(buffer);
-		free(buffer);
-		free(aux);
-	}
+		get_map_info(fd, map, &j);
 	map->map[j] = 0;
 	close(fd);
 	return (0);
@@ -76,8 +80,9 @@ int assign_map(t_map *map, char *path, int map_len)
 int	read_map(char *path, t_map *map)
 {
 	int		map_len;
-	int		i = -1;
+	int		i;
 
+	i = -1;
 	map_len = maplen(path);
 	map->map = malloc(sizeof(char *) * (map_len + 1 - 6));
 	assign_map(map, path, map_len);
