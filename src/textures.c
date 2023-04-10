@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:42:08 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/05 10:29:53 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:38:07 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*check_line(char *line)
 	int		i;
 	int		j;
 
-	new_line = malloc(sizeof(char) * 8);
+	new_line = malloc(sizeof(char) * 9);
 	i = -1;
 	j = -1;
 	while (line[++i])
