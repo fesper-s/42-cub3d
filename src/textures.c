@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:42:08 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/10 11:38:07 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:56:06 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ char	**get_hex_color(int fd)
 	char	**hex_color;
 	char	*line;
 	char	*hex_line;
-	char	*aux;
 
 	hex_line = ft_strdup("");
 	line = get_next_line(fd);
@@ -51,15 +50,7 @@ char	**get_hex_color(int fd)
 			free(line);
 			line = get_next_line(fd);
 			while (ft_strncmp(line, "/* pixels */", 12))
-			{
-				line = check_line(line);
-				aux = ft_strjoin(hex_line, line);
-				free(hex_line);
-				hex_line = ft_strdup(aux);
-				free(aux);
-				free(line);
-				line = get_next_line(fd);
-			}
+				getting_hex_colors(&line, &hex_line, fd);
 			break ;
 		}
 		free(line);
