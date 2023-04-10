@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/05 15:26:11 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/10 09:46:51 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,9 @@ int	close_game(t_game *game)
 
 int	game_loop(t_game *game)
 {	
+	float	speed;
 
-	float speed;
-
-	speed = 0.05;
-	printf("old_pldir-->%f\n", game->pl->old_pldir_x);
-	printf("pldir_x-->%f\n", game->pl->pldir_x);
-	printf("pldir_y-->%f\n", game->pl->pldir_y);
-	printf("old_plane-->%f\n", game->ray->old_plane_x);
-	printf("plane_x-->%f\n", game->ray->plane_x);
-	printf("plane_y-->%f\n", game->ray->plane_y);
+	speed = 0.08;
 	ft_bzero(game->img->addr, game->height * game->width * \
 		(game->img->bpp / 8));
 	raycasting(game);
@@ -52,7 +45,6 @@ int	cub3d(char *path, t_map *map, t_game *game)
 	game->img->img = mlx_new_image(game->mlx, 640, 480);
 	game->img->addr = mlx_get_data_addr(game->img->img, \
 		&game->img->bpp, &game->img->line_len, &game->img->endian);
-	//raycasting(game);
 	mlx_hook(game->mlx_win, 2, (1L << 0), key_press, game);
 	mlx_hook(game->mlx_win, 3, (1L << 1), key_release, game);
 	mlx_hook(game->mlx_win, 17, (1L << 17), close_game, game);

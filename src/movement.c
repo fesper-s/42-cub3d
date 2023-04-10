@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:34:37 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/05 15:36:20 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/10 09:46:11 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,12 @@ void	camera_movement(t_game *game, double speed)
 	pl = game->pl;
 	ray = game->ray;
 	pl->old_pldir_x = pl->pldir_x;
-    pl->pldir_x = pl->pldir_x * cos(rotation) - pl->pldir_y * sin(rotation);
-    pl->pldir_y = pl->old_pldir_x * sin(rotation) + pl->pldir_y * cos(rotation);
-    ray->old_plane_x = ray->plane_x;
+	pl->pldir_x = pl->pldir_x * cos(rotation) - pl->pldir_y * sin(rotation);
+	pl->pldir_y = pl->old_pldir_x * sin(rotation) + pl->pldir_y * cos(rotation);
+	ray->old_plane_x = ray->plane_x;
 	ray->plane_x = ray->plane_x * cos(rotation) - ray->plane_y * sin(rotation);
-	ray->plane_y = ray->old_plane_x * sin(rotation) + ray->plane_y * cos(rotation);
+	ray->plane_y = ray->old_plane_x * sin(rotation) \
+		+ ray->plane_y * cos(rotation);
 }
 
 int	key_press(int key, t_game *game)

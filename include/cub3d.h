@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/05 22:20:36 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/10 10:56:16 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,9 @@ typedef struct s_game
 //main.c
 int		close_game(t_game *game);
 
-// map.c
+// map.
+int		maplen(char *path);
+int		assign_map(t_map *map, char *path, int map_len);
 int		read_map(char *path, t_map *map);
 int		check_map(char *path, t_map *map);
 
@@ -144,6 +146,7 @@ int		check_sprites(t_map *map);
 //init.c
 void	init_var(t_game *game, t_map *map);
 void	pl_pos(t_game *game, t_map *map);
+void	set_player_pov(t_game *game, int i, int j);
 void	init_raycast(t_game *game, int x);
 
 //raycast.c

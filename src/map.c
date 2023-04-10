@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:47 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/03/20 14:25:33 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/10 10:52:04 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int assign_map(t_map *map, char *path, int map_len)
 int	read_map(char *path, t_map *map)
 {
 	int		map_len;
+	//realizar uma função de checagem de mapa e tirar a função replace_char
 	int		i = -1;
 
 	map_len = maplen(path);
