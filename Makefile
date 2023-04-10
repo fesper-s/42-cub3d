@@ -3,16 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+         #
+#    By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 08:12:43 by fesper-s          #+#    #+#              #
-#    Updated: 2023/04/04 09:53:28 by fesper-s         ###   ########.fr        #
+#    Updated: 2023/04/10 11:59:55 by gussoare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= cub3d
 
-SRCS	= ./src/main.c ./src/textures.c ./src/map.c  ./src/check.c ./src/init.c ./src/raycast.c ./src/utils.c ./src/ft_atoi_base.c ./src/error.c ./src/memory.c ./src/movement.c ./src/texture_direction.c ./src/texture_utils.c ./src/free_game.c
+SRCS	= ./src/main.c ./src/textures.c ./src/map.c  ./src/check.c ./src/init.c ./src/raycast.c \
+	./src/utils.c ./src/ft_atoi_base.c ./src/error.c ./src/memory.c ./src/movement.c \
+	./src/texture_direction.c ./src/texture_utils.c ./src/free_game.c ./src/draw.c
 
 OBJS	= $(SRCS:.c=.o)
 

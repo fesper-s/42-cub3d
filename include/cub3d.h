@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/10 11:08:43 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/10 12:26:19 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,9 +133,12 @@ typedef struct s_game
 
 //main.c
 int		close_game(t_game *game);
+int		game_loop(t_game *game);
+int		cub3d(char *path, t_map *map, t_game *game);
 
 // map.
 int		maplen(char *path);
+void	get_map_info(int fd, t_map *map, int *j);
 int		assign_map(t_map *map, char *path, int map_len);
 int		read_map(char *path, t_map *map);
 int		check_map(char *path, t_map *map);
@@ -152,15 +155,23 @@ void	init_raycast(t_game *game, int x);
 //raycast.c
 void	raycasting(t_game *game);
 void	step_and_side_calc(t_game *game);
+void	camera_wall_calc(t_game *game);
 void	dda(t_game *game);
 void	get_line_position(t_game *game);
+
+//draw.c
+void	img_pixel_put(t_game *game, int x, int y, int color);
+void	img_paste_pixel(t_game *game, int x, int y, int pixel);
+void	ver_line(int x, t_game *game, int **tex);
+void	get_texture_id(t_game *game);
+void	get_texture_pos(t_game *game, int x);
 
 // textures.c
 char	*check_line(char *line);
 char	**get_hex_color(int fd);
 char	*check_texture_line(char *line);
+void	joining_lines(char **line, char **buffer, int fd);
 char	**get_texture_line(int fd);
-int		**convert_texture(char **texture_line, char **hex_color, int i, int j);
 
 // texture_direction.c
 void	get_north_texture(t_map *map);
@@ -170,6 +181,7 @@ void	get_west_texture(t_map *map);
 void	get_texture(t_map *map);
 
 // texture_utils.c
+int		**convert_texture(char **texture_line, char **hex_color, int i, int j);
 int		rgb_to_hex(char *rgb);
 void	getting_hex_colors(char **line, char **hex_line, int fd);
 
