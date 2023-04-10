@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/10 11:02:42 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:09:22 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	game_loop(t_game *game)
 {	
 	float	speed;
 
-	speed = 0.05;
+	speed = 0.08;
 	ft_bzero(game->img->addr, game->height * game->width * \
 		(game->img->bpp / 8));
 	raycasting(game);

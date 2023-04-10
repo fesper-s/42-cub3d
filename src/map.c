@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:47 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/10 11:01:46 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:10:09 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ int	assign_map(t_map *map, char *path, int map_len)
 int	read_map(char *path, t_map *map)
 {
 	int		map_len;
-	int		i;
+	//realizar uma função de checagem de mapa e tirar a função replace_char
+	int		i = -1;
 
-	i = -1;
 	map_len = maplen(path);
 	map->map = malloc(sizeof(char *) * (map_len + 1 - 6));
 	assign_map(map, path, map_len);

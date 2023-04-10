@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 09:15:23 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/05 15:04:18 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/10 09:49:12 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,11 @@ void	dda(t_game *game)
 			ray->hit = 1;
 		//Calculando a distancia projetada na direção da camera
 		if (ray->side == 0) 
-			ray->camera_wall = fabs((ray->map_x - game->pl->pl_x + (1 - ray->step_x) / 2) / ray->raydir_x);
+			ray->camera_wall = fabs((ray->map_x - game->pl->pl_x \
+				+ (1 - ray->step_x) / 2) / ray->raydir_x);
 		else
-			ray->camera_wall = fabs((ray->map_y - game->pl->pl_y + (1 - ray->step_y) / 2) / ray->raydir_y);
+			ray->camera_wall = fabs((ray->map_y - game->pl->pl_y \
+				+ (1 - ray->step_y) / 2) / ray->raydir_y);
 	}
 }
 
@@ -165,7 +167,6 @@ void	raycasting(t_game *game)
 		step_and_side_calc(game);
 		dda(game);
 		get_line_position(game);
-
 		if (ray->side == 0)
 		{
 			if (ray->raydir_x < 0)
@@ -180,17 +181,14 @@ void	raycasting(t_game *game)
 			else
 				ray->tex_id = 3;
 		}
-
 		if (ray->side == 0)
 			ray->wall_x = pl->pl_y + ray->camera_wall * ray->raydir_y;
 		else
 			ray->wall_x = pl->pl_x + ray->camera_wall * ray->raydir_x;
 		ray->wall_x -= floor(ray->wall_x);
-
 		ray->tex_x = (int)(ray->wall_x * 64);
 		if ((ray->side == 0 && ray->raydir_x > 0) || (ray->side == 1 && ray->raydir_y < 0))
 			ray->tex_x = 64 - ray->tex_x - 1;
-
 		ray->step = 64 / (double)ray->line_height;
 		ray->tex_pos = (ray->draw_start - game->height / 2 + ray->line_height / 2) * ray->step;
 		if (ray->tex_id == 0)
@@ -201,7 +199,5 @@ void	raycasting(t_game *game)
 			ver_line(x, game, game->map->e_texture);
 		else
 			ver_line(x, game, game->map->w_texture);
-
-
 	}
 }

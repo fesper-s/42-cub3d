@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 08:54:44 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/04 09:45:28 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/10 10:03:08 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_strrncmp(char *s1, char *s2, int len)
 {
 	int	size_s1;
-	int size_s2;
+	int	size_s2;
 
 	if (!len)
 		return (0);

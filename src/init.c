@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:32:20 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/05 15:28:51 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/10 10:02:50 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,30 +49,39 @@ void	pl_pos(t_game *game, t_map *map)
 			{
 				game->pl->pl_x = i;
 				game->pl->pl_y = j;
-				if (map->map[i][j] == 'N')
-				{
-					game->pl->pldir_x = -1;
-					game->ray->plane_y = -0.66;
-				}
-				else if (map->map[i][j] == 'S')
-				{
-					game->pl->pldir_x = 1;
-					game->ray->plane_y = 0.66;
-				}
-				else if (map->map[i][j] == 'E')
-				{
-					game->pl->pldir_y = 1;
-					game->ray->plane_x = -0.66;
-				}
-				else if (map->map[i][j] == 'W')
-				{
-					game->pl->pldir_y = -1;
-					game->ray->plane_x = 0.66;
-				}
-				map->map[i][j] = '0';
+				set_player_pov(game, i, j);
+				break ;
 			}
 		}
 	}
+}
+
+void	set_player_pov(t_game *game, int i, int j)
+{
+	t_map	*map;
+
+	map = game->map;
+	if (map->map[i][j] == 'N')
+	{
+		game->pl->pldir_x = -1;
+		game->ray->plane_y = -0.66;
+	}
+	else if (map->map[i][j] == 'S')
+	{
+		game->pl->pldir_x = 1;
+		game->ray->plane_y = 0.66;
+	}
+	else if (map->map[i][j] == 'E')
+	{
+		game->pl->pldir_y = 1;
+		game->ray->plane_x = -0.66;
+	}
+	else if (map->map[i][j] == 'W')
+	{
+		game->pl->pldir_y = -1;
+		game->ray->plane_x = 0.66;
+	}
+		map->map[i][j] = '0';
 }
 
 void	init_raycast(t_game *game, int x)
@@ -88,11 +97,11 @@ void	init_raycast(t_game *game, int x)
 	if (ray->raydir_x == 0)
 		ray->raydir_x = 1e30;
 	else
-		ray->delta_x =  fabs(1 / ray->raydir_x);
+		ray->delta_x = fabs(1 / ray->raydir_x);
 	if (ray->raydir_y == 0)
 		ray->raydir_y = 1e30;
 	else
-		ray->delta_y =  fabs(1 / ray->raydir_y);
+		ray->delta_y = fabs(1 / ray->raydir_y);
 	ray->map_x = (int)game->pl->pl_x;
 	ray->map_y = (int)game->pl->pl_y;
 	ray->hit = 0;
