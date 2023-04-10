@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:44:15 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/10 10:37:14 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/10 13:19:31 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	get_north_texture(t_map *map)
 
 	fd = open(map->north, O_RDONLY);
 	if (fd == -1)
-		exit_error("invalid texture file");
+		exit_error("Invalid texture file");
 	hex_color = get_hex_color(fd);
 	close(fd);
 	fd = open(map->north, O_RDONLY);
@@ -39,7 +39,7 @@ void	get_south_texture(t_map *map)
 
 	fd = open(map->south, O_RDONLY);
 	if (fd == -1)
-		exit_error("invalid texture file");
+		exit_error("Invalid texture file");
 	hex_color = get_hex_color(fd);
 	close(fd);
 	fd = open(map->south, O_RDONLY);
@@ -58,7 +58,7 @@ void	get_east_texture(t_map *map)
 
 	fd = open(map->east, O_RDONLY);
 	if (fd == -1)
-		exit_error("invalid texture file");
+		exit_error("Invalid texture file");
 	hex_color = get_hex_color(fd);
 	close(fd);
 	fd = open(map->east, O_RDONLY);
@@ -77,7 +77,7 @@ void	get_west_texture(t_map *map)
 
 	fd = open(map->west, O_RDONLY);
 	if (fd == -1)
-		exit_error("invalid texture file");
+		exit_error("Invalid texture file");
 	hex_color = get_hex_color(fd);
 	close(fd);
 	fd = open(map->west, O_RDONLY);
@@ -94,6 +94,7 @@ void	get_texture(t_map *map)
 	get_south_texture(map);
 	get_east_texture(map);
 	get_west_texture(map);
+	check_floor_and_ceiling(map->floor, map->ceiling);
 	map->f_color = rgb_to_hex(map->floor);
 	map->c_color = rgb_to_hex(map->ceiling);
 }
