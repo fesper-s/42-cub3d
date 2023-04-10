@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/10 09:46:51 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:09:22 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	close_game(t_game *game)
 {
 	mlx_destroy_window(game->mlx, game->mlx_win);
+	//free_game(game);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
@@ -67,6 +68,6 @@ int	main(int argc, char **argv)
 	game.pl = &pl;
 	game.img = &img;
 	cub3d(argv[1], &map, &game);
-	free_game(&game);
+	//free_game(&game);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 13:22:18 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/05 10:31:03 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/10 10:37:26 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,17 @@ int	rgb_to_hex(char *rgb)
 	hex_value = (rgb_value[0] << 16) | (rgb_value[1] << 8) | rgb_value[2];
 	free(rgb_value);
 	return (hex_value);
+}
+
+void	getting_hex_colors(char **line, char **hex_line, int fd)
+{
+	char	*aux;
+
+	*line = check_line(*line);
+	aux = ft_strjoin(*hex_line, *line);
+	free(*hex_line);
+	*hex_line = ft_strdup(aux);
+	free(aux);
+	free(*line);
+	*line = get_next_line(fd);
 }
