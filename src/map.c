@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:47 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/10 13:18:55 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/10 14:46:04 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,30 @@ int	assign_map(t_map *map, char *path, int map_len)
 	return (0);
 }
 
+void	map_validation(t_map *map)
+{
+	int	i;
+
+	i = -1;
+	while (map->map[++i])
+		printf("%s\n", map->map[i]);
+}
+
+
 int	read_map(char *path, t_map *map)
 {
 	int		map_len;
-	//realizar uma função de checagem de mapa e tirar a função replace_char
-	int		i = -1;
+	int		i;
 
+	i = -1;
 	map_len = maplen(path);
 	map->map = malloc(sizeof(char *) * (map_len + 1 - 6));
 	assign_map(map, path, map_len);
 	if (!check_sprites(map))
 		return (0);
 	while (map->map[++i])
-		replace_char(map->map[i], ' ', '1');
+		replace_char(map->map[i], ' ', '3');
+	map_validation(map);
 	return (1);
 }
 
