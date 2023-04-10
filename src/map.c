@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:47 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/10 14:46:04 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:47:24 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,57 @@ int	assign_map(t_map *map, char *path, int map_len)
 	return (0);
 }
 
-void	map_validation(t_map *map)
+void	insert_fill_line(t_map *map, char ***b_map)
 {
 	int	i;
+	int	j;
+	int	len;
 
 	i = -1;
+	j = 1;
 	while (map->map[++i])
-		printf("%s\n", map->map[i]);
+	{
+		len = ft_strlen(map->map[i]);
+		(*b_map)[j] = malloc((len + 3) * sizeof(char));
+		(*b_map)[j][0] = '3';
+		ft_strlcat((*b_map)[j], map->map[i], len + 2);
+		(*b_map)[j][len + 1] = '3';
+		j++;
+	}
+}
+
+void	map_validation(t_map *map)
+{
+	char	**b_map;
+	int		len;
+	int		i;
+	int		k;
+
+	printf("antes do len\n");
+	len = 0;
+	while (map->map[len])
+		len++;
+	b_map = malloc((len + 3) * sizeof(char *));
+
+	printf("antes da primeira linha\n");
+	b_map[0] = ft_strdup(map->map[0]);
+	k = -1;
+	while (b_map[0][++k])
+		b_map[0][k] = '3';
+
+	printf("antes de copiar o mapa\n");
+	insert_fill_line(map, &b_map);
+
+	printf("antes da ultima linha\n");
+	b_map[len] = ft_strdup(map->map[len - 1]);
+	k = -1;
+	while (b_map[len][++k])
+		b_map[len][k] = '3';
+
+	printf("antes de printar o mapa\n");
+	i = -1;
+	while (b_map[++i])
+		printf("%s\n", b_map[i]);
 }
 
 
