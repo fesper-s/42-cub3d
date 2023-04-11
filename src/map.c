@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:47 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/11 09:22:53 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/11 10:53:51 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,46 @@ void	map_validation(t_map *map)
 	check_breach(b_map);
 }
 
+void	count_players(t_map *map)
+{
+	int	i;
+	int j;
+	int count;
+
+	count = 0;
+	i = -1;
+	while (map->map[++i])
+	{
+		j = -1;
+		while (map->map[i][++j])
+		{
+			if (ft_strchr("NSEO", map->map[i][j]))
+				count++;
+		}
+	}
+	if (count > 1)
+		exit_error("There's more than one player inside map");
+}
+
+void	check_map_elements(t_map *map)
+{
+	int	i;
+	int j;
+	int count;
+
+	count = 0;
+	i = -1;
+	while (map->map[++i])
+	{
+		j = -1;
+		while (map->map[i][++j])
+		{
+			if (!ft_strchr("NSEO10 ", map->map[i][j]))
+				exit_error("Invalid element inside map");
+		}
+	}
+	count_players(map);
+}
 
 int	read_map(char *path, t_map *map)
 {
@@ -176,6 +216,7 @@ int	read_map(char *path, t_map *map)
 	assign_map(map, path, map_len);
 	if (!check_sprites(map))
 		return (0);
+	check_map_elements(map);
 	while (map->map[++i])
 		replace_char(map->map[i], ' ', '3');
 	map_validation(map);
