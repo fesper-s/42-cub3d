@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:47 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/10 15:47:24 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/11 08:58:03 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,21 @@ int	maplen(char *path)
 	}
 	free(aux);
 	close(fd);
+	return (len);
+}
+
+int	grand_line(char **str)
+{
+	int		i;
+	int		len;
+
+	i = -1;
+	len = 0;
+	while (str[++i])
+	{
+		if ((int)ft_strlen(str[i]) > len)
+			len = ft_strlen(str[i]);
+	}
 	return (len);
 }
 
@@ -81,17 +96,19 @@ void	insert_fill_line(t_map *map, char ***b_map)
 {
 	int	i;
 	int	j;
-	int	len;
+	int	k;
 
 	i = -1;
 	j = 1;
 	while (map->map[++i])
 	{
-		len = ft_strlen(map->map[i]);
-		(*b_map)[j] = malloc((len + 3) * sizeof(char));
+		(*b_map)[j] = malloc((grand_line(map->map) + 3) * sizeof(char));
 		(*b_map)[j][0] = '3';
-		ft_strlcat((*b_map)[j], map->map[i], len + 2);
-		(*b_map)[j][len + 1] = '3';
+		ft_strlcat((*b_map)[j], map->map[i], grand_line(map->map) + 2);
+		k = ft_strlen(map->map[i]);
+		while (++k < grand_line(map->map) + 2)
+			(*b_map)[j][k] = '3';
+		(*b_map)[j][k] = 0;
 		j++;
 	}
 }
@@ -100,9 +117,11 @@ void	map_validation(t_map *map)
 {
 	char	**b_map;
 	int		len;
+	int		line_len;
 	int		i;
 	int		k;
 
+	line_len = grand_line(map->map);
 	printf("antes do len\n");
 	len = 0;
 	while (map->map[len])
@@ -110,19 +129,21 @@ void	map_validation(t_map *map)
 	b_map = malloc((len + 3) * sizeof(char *));
 
 	printf("antes da primeira linha\n");
-	b_map[0] = ft_strdup(map->map[0]);
+	b_map[0] = malloc(sizeof(char) * (line_len + 3));
 	k = -1;
-	while (b_map[0][++k])
+	while (++k < line_len + 2)
 		b_map[0][k] = '3';
+	b_map[0][k] = 0;
 
 	printf("antes de copiar o mapa\n");
 	insert_fill_line(map, &b_map);
 
 	printf("antes da ultima linha\n");
-	b_map[len] = ft_strdup(map->map[len - 1]);
+	b_map[len + 1] = malloc(sizeof(char) * (line_len + 3));
 	k = -1;
-	while (b_map[len][++k])
-		b_map[len][k] = '3';
+	while (++k < line_len + 2)
+		b_map[len + 1][k] = '3';
+	b_map[len + 1][k] = 0;
 
 	printf("antes de printar o mapa\n");
 	i = -1;
