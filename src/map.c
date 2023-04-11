@@ -6,7 +6,7 @@
 /*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:47 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/11 08:58:03 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/11 09:22:53 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,42 +113,55 @@ void	insert_fill_line(t_map *map, char ***b_map)
 	}
 }
 
+void	check_breach(char **b_map)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (b_map[++i])
+	{
+		j = -1;
+		while (b_map[i][++j])
+		{
+			if (b_map[i][j] == '0')
+			 {
+				if (b_map[i][j + 1] == '3' || b_map[i][j - 1] == '3' ||\
+					b_map[i + 1][j] == '3' || b_map[i - 1][j] == '3')
+					exit_error("Breached map");
+			 }
+		}
+	}
+}
+
+
 void	map_validation(t_map *map)
 {
 	char	**b_map;
 	int		len;
 	int		line_len;
 	int		i;
-	int		k;
 
 	line_len = grand_line(map->map);
-	printf("antes do len\n");
 	len = 0;
 	while (map->map[len])
 		len++;
 	b_map = malloc((len + 3) * sizeof(char *));
-
-	printf("antes da primeira linha\n");
 	b_map[0] = malloc(sizeof(char) * (line_len + 3));
-	k = -1;
-	while (++k < line_len + 2)
-		b_map[0][k] = '3';
-	b_map[0][k] = 0;
-
-	printf("antes de copiar o mapa\n");
-	insert_fill_line(map, &b_map);
-
-	printf("antes da ultima linha\n");
-	b_map[len + 1] = malloc(sizeof(char) * (line_len + 3));
-	k = -1;
-	while (++k < line_len + 2)
-		b_map[len + 1][k] = '3';
-	b_map[len + 1][k] = 0;
-
-	printf("antes de printar o mapa\n");
 	i = -1;
-	while (b_map[++i])
-		printf("%s\n", b_map[i]);
+	while (++i < line_len + 2)
+		b_map[0][i] = '3';
+	b_map[0][i] = 0;
+	insert_fill_line(map, &b_map);
+	b_map[len + 1] = malloc(sizeof(char) * (line_len + 3));
+	i = -1;
+	while (++i < line_len + 2)
+		b_map[len + 1][i] = '3';
+	b_map[len + 1][i] = 0;
+	int k = -1;
+	while (b_map[++k])
+		printf("%s\n", b_map[k]);
+	check_breach(b_map);
 }
 
 
