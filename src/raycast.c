@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 09:15:23 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/10 12:19:18 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/13 08:29:31 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	camera_wall_calc(t_game *game)
 
 	ray = game->ray;
 	pl = game->pl;
-	//Calculando a distancia projetada na direção da camera
 	if (ray->side == 0)
 		ray->camera_wall = fabs((ray->map_x - pl->pl_x \
 			+ (1 - ray->step_x) / 2) / ray->raydir_x);
@@ -64,7 +63,6 @@ void	dda(t_game *game)
 	ray = game->ray;
 	while (ray->hit == 0)
 	{
-		//pular para outro quadrado do mapa, para o X ou para o Y
 		if (ray->side_x < ray->side_y)
 		{
 			ray->side_x += ray->delta_x;
@@ -77,7 +75,6 @@ void	dda(t_game *game)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		//Checar para ver se o raio atingiu 
 		if (game->map->map[ray->map_x][ray->map_y] != '0')
 			ray->hit = 1;
 		camera_wall_calc(game);
@@ -89,9 +86,7 @@ void	get_line_position(t_game *game)
 	t_raycast	*ray;
 
 	ray = game->ray;
-	//Calculate height of line to draw on screen
 	ray->line_height = (int)(game->height / ray->camera_wall);
-	//calculate lowest and highest pixel to fill in current stripe
 	ray->draw_start = (-1 * ray->line_height) / 2 + game->height / 2;
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
@@ -102,7 +97,7 @@ void	get_line_position(t_game *game)
 
 void	raycasting(t_game *game)
 {
-	int			x;
+	int	x;
 
 	x = -1;
 	while (++x < game->width)

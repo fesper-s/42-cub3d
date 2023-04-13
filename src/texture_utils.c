@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 13:22:18 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/10 13:19:37 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/13 08:36:28 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	check_floor_and_ceiling(char *floor, char *ceiling)
 	}
 	if (i != 3)
 		exit_error("Invalid floor value");
+	free_charpp(buffer);
 	buffer = ft_split(ceiling, ',');
 	i = -1;
 	while (buffer[++i])
