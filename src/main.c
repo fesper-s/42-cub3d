@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:12:07 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/10 11:47:46 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/13 08:30:22 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,5 @@ int	main(int argc, char **argv)
 	game.pl = &pl;
 	game.img = &img;
 	cub3d(argv[1], &map, &game);
-	//free_game(&game);
 	return (0);
 }

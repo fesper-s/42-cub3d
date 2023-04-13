@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/10 13:19:47 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/13 08:27:30 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,12 +136,18 @@ int		close_game(t_game *game);
 int		game_loop(t_game *game);
 int		cub3d(char *path, t_map *map, t_game *game);
 
-// map.
-int		maplen(char *path);
+//map.c
 void	get_map_info(int fd, t_map *map, int *j);
 int		assign_map(t_map *map, char *path, int map_len);
 int		read_map(char *path, t_map *map);
 int		check_map(char *path, t_map *map);
+void	insert_fill_line(t_map *map, char ***b_map);
+
+//map_validation.c
+void	count_players(t_map *map);
+void	map_validation(t_map *map);
+void	check_map_elements(t_map *map);
+void	check_breach(char **b_map);
 
 //check.c
 int		check_sprites(t_map *map);
@@ -167,21 +173,21 @@ void	ver_line(int x, t_game *game, int **tex);
 void	get_texture_id(t_game *game);
 void	get_texture_pos(t_game *game, int x);
 
-// textures.c
+//textures.c
 char	*check_line(char *line);
 char	**get_hex_color(int fd);
 char	*check_texture_line(char *line);
 void	joining_lines(char **line, char **buffer, int fd);
 char	**get_texture_line(int fd);
 
-// texture_direction.c
+//texture_direction.c
 void	get_north_texture(t_map *map);
 void	get_south_texture(t_map *map);
 void	get_east_texture(t_map *map);
 void	get_west_texture(t_map *map);
 void	get_texture(t_map *map);
 
-// texture_utils.c
+//texture_utils.c
 int		**convert_texture(char **texture_line, char **hex_color, int i, int j);
 int		rgb_to_hex(char *rgb);
 void	getting_hex_colors(char **line, char **hex_line, int fd);
@@ -194,19 +200,21 @@ void	camera_movement(t_game *game, double speed);
 int		key_press(int key, t_game *game);
 int		key_release(int key, t_game *game);
 
-// utils.c
+//utils.c
 int		ft_strrncmp(char *s1, char *s2, int len);
 void	replace_char(char *str, char old, char new);
 int		char_in_str(char *str, char c);
+int		maplen(char *path);
+int		grand_line(char **str);
 
-// ft_atoi_base.c
+//ft_atoi_base.c
 int		ft_atoi_base(const char *str, int str_base);
 
-// error.c
+//error.c
 int		print_error(char *msg);
 void	exit_error(char *msg);
 
-// memory.c
+//memory.c
 void	free_charpp(char **ptr);
 void	free_intpp(int **ptr);
 void	free_map(t_map *map);
