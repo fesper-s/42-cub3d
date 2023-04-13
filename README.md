@@ -18,7 +18,7 @@ Follow the instructions from this repository https://github.com/codam-coding-col
 ## Usage
 `make` and execute `./cub3d maps/<map file>.cub`. For example:
 ```
-./cub3d maps/full.cub
+./cub3d maps/minimalist.cub
 ```
 
 ##
