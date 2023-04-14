@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 08:21:08 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/13 08:42:56 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/14 13:54:11 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	count_players(t_map *map)
 		j = -1;
 		while (map->map[i][++j])
 		{
-			if (ft_strchr("NSEO", map->map[i][j]))
+			if (ft_strchr("NSEW", map->map[i][j]))
 				count++;
 		}
 	}
@@ -76,7 +76,7 @@ void	check_map_elements(t_map *map)
 		j = -1;
 		while (map->map[i][++j])
 		{
-			if (!ft_strchr("NSEO10 ", map->map[i][j]))
+			if (!ft_strchr("NSEW10 ", map->map[i][j]))
 				exit_error("Invalid element inside map");
 		}
 	}
