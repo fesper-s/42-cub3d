@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/13 08:27:30 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/16 18:30:26 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ int		game_loop(t_game *game);
 int		cub3d(char *path, t_map *map, t_game *game);
 
 //map.c
-void	get_map_info(int fd, t_map *map, int *j);
+void	get_map_info(int fd, t_map *map, int *j, int *found_map);
 int		assign_map(t_map *map, char *path, int map_len);
 int		read_map(char *path, t_map *map);
 int		check_map(char *path, t_map *map);
@@ -150,7 +150,7 @@ void	check_map_elements(t_map *map);
 void	check_breach(char **b_map);
 
 //check.c
-int		check_sprites(t_map *map);
+void	check_sprites(t_map *map);
 
 //init.c
 void	init_var(t_game *game, t_map *map);

@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 08:21:08 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/14 13:54:11 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/16 18:04:05 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,7 @@ void	check_map_elements(t_map *map)
 {
 	int	i;
 	int	j;
-	int	count;
 
-	count = 0;
 	i = -1;
 	while (map->map[++i])
 	{
