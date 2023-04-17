@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:24:30 by gussoare          #+#    #+#             */
-/*   Updated: 2023/04/16 18:30:17 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/17 12:20:44 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,13 @@ void	check_sprites(t_map *map)
 		exit_error("Empty floor color");
 	else if (!map->ceiling || map->ceiling[0] == 0)
 		exit_error("Empty ceiling color");
+}
+
+int	check_map(char *path, t_map *map)
+{
+	if (ft_strrncmp(path, ".cub", 5))
+		exit_error("Invalid type of file");
+	init_map(map);
+	read_map(path, map);
+	return (0);
 }
