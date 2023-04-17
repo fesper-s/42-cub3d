@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:47 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/17 11:42:23 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/17 11:53:41 by gussoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	function(char *str, char *to_cmp, t_map *map, int *found_map)
 		map->floor = ft_strdup(buffer);
 	else if (!ft_strncmp(to_cmp, "C ", 2))
 		map->ceiling = ft_strdup(buffer);
+	free(buffer);
 }
 
 void	get_map_info(int fd, t_map *map, int *j, int *found_map)
