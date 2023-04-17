@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 08:24:22 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/04 09:50:55 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/17 11:42:44 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,10 @@ void	free_map(t_map *map)
 	free_intpp(map->w_texture);
 	free(map->floor);
 	free(map->ceiling);
+}
+
+void	free_two(char *p1, char *p2)
+{
+	free(p1);
+	free(p2);
 }
