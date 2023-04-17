@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 13:22:18 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/13 08:36:28 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/17 12:19:01 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,34 @@ void	getting_hex_colors(char **line, char **hex_line, int fd)
 	*line = get_next_line(fd);
 }
 
+void	check_commas(char *floor, char *ceiling)
+{
+	int	i;
+
+	i = -1;
+	if (floor[0] == ',')
+		exit_error("Invalid floor value");
+	while (floor[++i])
+		if (floor[i] == ',' && floor[i + 1] == ',')
+			exit_error("Invalid floor value");
+	if (floor[i - 1] == ',')
+		exit_error("Invalid floor value");
+	i = -1;
+	if (ceiling[0] == ',')
+		exit_error("Invalid ceiling value");
+	while (ceiling[++i])
+		if (ceiling[i] == ',' && ceiling[i + 1] == ',')
+			exit_error("Invalid ceiling value");
+	if (ceiling[i - 1] == ',')
+		exit_error("Invalid ceiling value");
+}
+
 void	check_floor_and_ceiling(char *floor, char *ceiling)
 {
 	char	**buffer;
 	int		i;
 
+	check_commas(floor, ceiling);
 	buffer = ft_split(floor, ',');
 	i = -1;
 	while (buffer[++i])

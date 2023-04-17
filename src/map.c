@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gussoare <gussoare@student.42.rio>         +#+  +:+       +#+        */
+/*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:47 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/17 11:53:41 by gussoare         ###   ########.fr       */
+/*   Updated: 2023/04/17 12:20:33 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	function(char *str, char *to_cmp, t_map *map, int *found_map)
+void	asign_map_info(char *str, char *to_cmp, t_map *map, int *found_map)
 {
 	char	*buffer;
 
@@ -42,17 +42,17 @@ void	get_map_info(int fd, t_map *map, int *j, int *found_map)
 	aux = get_next_line(fd);
 	buffer = ft_strtrim(aux, "\n");
 	if (!ft_strncmp(buffer, "NO ", 3))
-		function(buffer, "NO ", map, found_map);
+		asign_map_info(buffer, "NO ", map, found_map);
 	else if (!ft_strncmp(buffer, "SO ", 3))
-		function(buffer, "SO ", map, found_map);
+		asign_map_info(buffer, "SO ", map, found_map);
 	else if (!ft_strncmp(buffer, "EA ", 3))
-		function(buffer, "EA ", map, found_map);
+		asign_map_info(buffer, "EA ", map, found_map);
 	else if (!ft_strncmp(buffer, "WE ", 3))
-		function(buffer, "WE ", map, found_map);
+		asign_map_info(buffer, "WE ", map, found_map);
 	else if (!ft_strncmp(buffer, "F ", 2))
-		function(buffer, "F ", map, found_map);
+		asign_map_info(buffer, "F ", map, found_map);
 	else if (!ft_strncmp(buffer, "C ", 2))
-		function(buffer, "C ", map, found_map);
+		asign_map_info(buffer, "C ", map, found_map);
 	else if (ft_strlen(buffer) && buffer[0])
 	{
 		*found_map = 1;
@@ -119,13 +119,4 @@ int	read_map(char *path, t_map *map)
 		replace_char(map->map[i], ' ', '3');
 	map_validation(map);
 	return (1);
-}
-
-int	check_map(char *path, t_map *map)
-{
-	if (ft_strrncmp(path, ".cub", 5))
-		exit_error("Invalid type of file");
-	init_map(map);
-	read_map(path, map);
-	return (0);
 }
