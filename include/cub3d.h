@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 08:13:26 by fesper-s          #+#    #+#             */
-/*   Updated: 2023/04/16 18:30:26 by fesper-s         ###   ########.fr       */
+/*   Updated: 2023/04/17 11:41:44 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,7 @@ void	exit_error(char *msg);
 void	free_charpp(char **ptr);
 void	free_intpp(int **ptr);
 void	free_map(t_map *map);
+void	free_two(char *p1, char *p2);
 
 // free_game.c
 void	free_game(t_game *game);
