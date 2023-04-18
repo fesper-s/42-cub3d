@@ -1,5 +1,5 @@
 <div align="center">
-<a href="https://github.com/fesper-s/42-cub3d"><img height="120px" src="https://github.com/fesper-s/fesper-s/blob/main/src/42_badges/cub3dn.png"></a>
+<a href="https://github.com/fesper-s/42-cub3d"><img height="120px" src="https://github.com/fesper-s/fesper-s/blob/main/src/42_badges/cub3de.png"></a>
 
 # cub3d
 </div>
