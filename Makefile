@@ -6,17 +6,21 @@
 #    By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 08:12:43 by fesper-s          #+#    #+#              #
-#    Updated: 2023/04/13 08:27:08 by fesper-s         ###   ########.fr        #
+#    Updated: 2023/04/19 08:33:32 by fesper-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= cub3d
+NAME	= cub3D
 
-SRCS	= ./src/main.c ./src/textures.c ./src/map.c  ./src/check.c ./src/init.c ./src/raycast.c ./src/utils.c ./src/ft_atoi_base.c ./src/error.c ./src/memory.c ./src/movement.c ./src/texture_direction.c ./src/texture_utils.c ./src/free_game.c ./src/draw.c ./src/map_validation.c
+SRCS	= ./src/main.c ./src/textures.c ./src/map.c  ./src/check.c \
+		  ./src/init.c ./src/raycast.c ./src/utils.c ./src/ft_atoi_base.c \
+		  ./src/error.c ./src/memory.c ./src/movement.c \
+		  ./src/texture_direction.c ./src/texture_utils.c ./src/free_game.c \
+		  ./src/draw.c ./src/map_validation.c
 
 OBJS	= $(SRCS:.c=.o)
 
-CFLAGS	= -Wall -Wextra -Werror -g
+CFLAGS	= -Wall -Wextra -Werror
 
 LIBFT	= ./lib/libft/libft.a 
 
